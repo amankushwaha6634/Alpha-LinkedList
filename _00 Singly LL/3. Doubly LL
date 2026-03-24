@@ -1,0 +1,182 @@
+/*
+==============================================================
+DOUBLY LINKED LIST NOTES
+==============================================================
+
+1) What is a Doubly Linked List?
+--------------------------------------------------------------
+- A doubly linked list is a linked list where each node has:
+  1. prev pointer
+  2. data
+  3. next pointer
+
+- prev points to previous node
+- next points to next node
+- It can move in both directions
+
+Diagram:
+null <- [10] <-> [20] <-> [30] -> null
+
+--------------------------------------------------------------
+
+2) Structure of One Node
+--------------------------------------------------------------
+Each node has 3 parts:
+
++---------+---------+---------+
+|  prev   |  data   |  next   |
++---------+---------+---------+
+
+- prev = address of previous node
+- data = actual value
+- next = address of next node
+
+--------------------------------------------------------------
+
+3) Main Difference from Singly Linked List
+--------------------------------------------------------------
+- In singly LL, each node has only next
+- In doubly LL, each node has both prev and next
+- So backward traversal is possible in doubly LL
+
+--------------------------------------------------------------
+
+4) Meaning of Head and Tail
+--------------------------------------------------------------
+- head is the first node
+- tail is the last node
+
+Important:
+- head.prev is always null
+- tail.next is always null
+
+Diagram:
+head                               tail
+ |                                  |
+ v                                  v
+null <- [10] <-> [20] <-> [30] -> null
+
+--------------------------------------------------------------
+
+5) Traversal in Doubly Linked List
+--------------------------------------------------------------
+Forward traversal:
+head -> next -> next
+
+Backward traversal:
+tail -> prev -> prev
+
+Example:
+null <- [10] <-> [20] <-> [30] -> null
+
+Forward:
+10 -> 20 -> 30
+
+Backward:
+30 -> 20 -> 10
+
+--------------------------------------------------------------
+
+6) Why Doubly LL is Useful
+--------------------------------------------------------------
+- Easy backward movement
+- Deletion is easier when node is given
+- Useful in browser history, undo/redo, LRU cache
+
+--------------------------------------------------------------
+
+7) Insertion Idea
+--------------------------------------------------------------
+To insert a node in doubly LL,
+we usually update 4 links carefully:
+- newNode.prev
+- newNode.next
+- previous node's next
+- next node's prev
+
+Example: insert 25 between 20 and 30
+
+Before:
+null <- [10] <-> [20] <-> [30] -> null
+
+After:
+null <- [10] <-> [20] <-> [25] <-> [30] -> null
+
+--------------------------------------------------------------
+
+8) Deletion Idea
+--------------------------------------------------------------
+To delete a node,
+connect previous node and next node directly.
+
+Before:
+null <- [10] <-> [20] <-> [30] -> null
+
+Delete 20
+
+After:
+null <- [10] <-> [30] -> null
+
+Changes:
+- 10.next = 30
+- 30.prev = 10
+
+--------------------------------------------------------------
+
+9) Advantages of Doubly Linked List
+--------------------------------------------------------------
+- Can traverse in both directions
+- Easier deletion compared to singly LL
+- Helpful when previous node is needed
+
+--------------------------------------------------------------
+
+10) Disadvantages of Doubly Linked List
+--------------------------------------------------------------
+- Extra memory needed for prev pointer
+- More pointer updates
+- Slightly more complex than singly LL
+
+--------------------------------------------------------------
+
+11) Time Complexity
+--------------------------------------------------------------
+Operation                  Time
+--------------------------------------------------------------
+Forward Traversal          O(n)
+Backward Traversal         O(n)
+Insert at beginning        O(1)
+Insert at end              O(n)   // O(1) if tail is maintained
+Delete at beginning        O(1)
+Delete at end              O(n)   // O(1) if tail is maintained
+Delete given node          O(1)   // if node reference is given
+
+--------------------------------------------------------------
+
+12) Real Interview One-Liner
+--------------------------------------------------------------
+A doubly linked list is a linear data structure
+where each node stores prev, data, and next pointers,
+allowing traversal in both forward and backward directions.
+
+--------------------------------------------------------------
+
+13) Very Short Revision Note
+--------------------------------------------------------------
+- Node = prev + data + next
+- head.prev = null
+- tail.next = null
+- forward and backward traversal possible
+- more flexible than singly LL
+- extra memory used for prev
+
+--------------------------------------------------------------
+
+14) Simple Visual Summary
+--------------------------------------------------------------
+null <- +---------+---------+---------+ <-> +---------+---------+---------+ <-> +---------+---------+---------+ -> null
+        |  prev   |   10    |  next   |    |  prev   |   20    |  next   |    |  prev   |   30    |  next   |
+        +---------+---------+---------+    +---------+---------+---------+    +---------+---------+---------+
+
+==============================================================
+*/

@@ -1,0 +1,165 @@
+/*
+==============================================================
+SINGLY LINKED LIST NOTES
+==============================================================
+
+1) What is a Singly Linked List?
+--------------------------------------------------------------
+- A singly linked list is a linear data structure.
+- It is made of nodes.
+- Each node contains:
+  1. data
+  2. next pointer/reference
+
+- The next pointer stores the address of the next node.
+- The last node points to null.
+
+Diagram:
+head
+ |
+ v
++---------+---------+      +---------+---------+      +---------+---------+
+|    0    |  next   | ---> |    1    |  next   | ---> |    2    |  null   |
++---------+---------+      +---------+---------+      +---------+---------+
+
+--------------------------------------------------------------
+
+2) Structure of One Node
+--------------------------------------------------------------
+Each node has 2 parts:
+
++---------+---------+
+|  data   |  next   |
++---------+---------+
+
+Example:
++---------+---------+
+|   10    |   *     |
++---------+---------+
+
+- data = actual value
+- next = address/reference of next node
+
+--------------------------------------------------------------
+
+3) Meaning of Head
+--------------------------------------------------------------
+- head is the starting pointer of the linked list.
+- It stores the address of the first node.
+- Using head, we can traverse the whole list.
+
+
+4) Meaning of Tail
+--------------------------------------------------------------
+- tail is the last node of the linked list.
+- Its next pointer is always null.
+
+
+5) Why it is called "Singly"
+--------------------------------------------------------------
+- It is called singly linked list because
+  each node points in only one direction:
+  forward direction.
+
+
+6) Main Properties
+--------------------------------------------------------------
+- Dynamic size
+- Non-contiguous memory
+- Sequential access
+- Easy insertion/deletion at known position
+- Extra memory needed for pointer
+
+
+7) Traversal in Singly Linked List
+--------------------------------------------------------------
+To print or visit all nodes:
+- start from head
+- move node by node using next
+- stop when current becomes null
+
+
+8) Important Point About Access
+--------------------------------------------------------------
+- In array, we can directly access arr[i]
+- In linked list, direct indexing is not possible
+
+To reach 3rd node:
+- start from head
+- move one by one
+
+Example:
+head
+ |
+ v
+[10|*] -> [20|*] -> [30|*] -> [40|null]
+
+To reach 30:
+- first go to 10
+- then 20
+- then 30
+
+
+
+13) Advantages of Singly Linked List
+--------------------------------------------------------------
+- Dynamic size
+- Easy insertion at beginning
+- Easy deletion if previous node is known
+- Better than array when many insertions/deletions happen
+
+--------------------------------------------------------------
+
+14) Disadvantages of Singly Linked List
+--------------------------------------------------------------
+- No random access
+- Extra memory for next pointer
+- Traversal is slower than array
+- Cannot move backward directly
+- Searching takes more time
+
+
+15) Time Complexity
+--------------------------------------------------------------
+Operation                  Time
+--------------------------------------------------------------
+Access by position         O(n)
+Search                     O(n)
+Insert at beginning        O(1)
+Insert at end              O(n)   // O(1) if tail is maintained
+Delete at beginning        O(1)
+Delete by value/position   O(n)
+
+--------------------------------------------------------------
+
+16) Real Interview One-Liner
+--------------------------------------------------------------
+A singly linked list is a linear data structure
+where each node stores data and the reference
+to the next node, allowing only forward traversal.
+
+--------------------------------------------------------------
+
+17) Very Short Revision Note
+--------------------------------------------------------------
+- Node = data + next
+- head = first node
+- tail = last node
+- last node points to null
+- forward traversal only
+- no direct indexing
+- insertion/deletion easier than array
+
+--------------------------------------------------------------
+
+18) Simple Visual Summary
+--------------------------------------------------------------
+head                                      tail
+ |                                         |
+ v                                         v
++---------+---------+   +---------+---------+   +---------+---------+
+|   0     |   *     |-> |   1     |   *     |-> |   2     |  null   |
++---------+---------+   +---------+---------+   +---------+---------+
+
+==============================================================
+*/

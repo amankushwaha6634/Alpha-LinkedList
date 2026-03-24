@@ -1,0 +1,191 @@
+/*
+==============================================================
+CIRCULAR LINKED LIST NOTES
+==============================================================
+
+1) What is a Circular Linked List?
+--------------------------------------------------------------
+- A circular linked list is a linked list where
+  the last node does not point to null.
+- Instead, the last node points back to the first node.
+
+Diagram:
+head
+ |
+ v
+[10] -> [20] -> [30]
+ ^               |
+ |_______________|
+
+--------------------------------------------------------------
+
+2) Main Idea
+--------------------------------------------------------------
+- In normal singly linked list:
+  last.next = null
+
+- In circular linked list:
+  last.next = head
+
+- So the list forms a circle.
+
+--------------------------------------------------------------
+
+3) Important Property
+--------------------------------------------------------------
+- There is no null at the end.
+- Traversal can continue forever if we do not stop manually.
+- We usually stop when we come back to head.
+
+--------------------------------------------------------------
+
+4) Head and Tail
+--------------------------------------------------------------
+- head is the first node
+- tail is the last node
+
+Important:
+- tail.next always points to head
+
+Diagram:
+head                 tail
+ |                    |
+ v                    v
+[10] -> [20] -> [30]
+ ^___________________|
+
+--------------------------------------------------------------
+
+5) Traversal in Circular Linked List
+--------------------------------------------------------------
+- Start from head
+- Visit nodes one by one
+- Stop when current becomes head again
+
+Example:
+head
+ |
+ v
+[1] -> [2] -> [3]
+ ^______________|
+
+Traversal:
+1 -> 2 -> 3
+
+--------------------------------------------------------------
+
+6) Why Circular Linked List is Useful
+--------------------------------------------------------------
+- Useful when data needs repeated cyclic traversal
+- Used in round robin scheduling
+- Used in music playlist looping
+- Used in turn-based games
+
+--------------------------------------------------------------
+
+7) Insertion Idea
+--------------------------------------------------------------
+At end:
+- new node should point to head
+- old tail should point to new node
+
+Example:
+
+Before:
+head
+ |
+ v
+[10] -> [20] -> [30]
+ ^__________________|
+
+Insert 40
+
+After:
+head
+ |
+ v
+[10] -> [20] -> [30] -> [40]
+ ^___________________________|
+
+--------------------------------------------------------------
+
+8) Deletion Idea
+--------------------------------------------------------------
+- While deleting, circle must remain connected
+- If deleting head, tail.next should be updated to new head
+
+Example:
+head
+ |
+ v
+[10] -> [20] -> [30]
+ ^__________________|
+
+Delete 10
+
+After:
+head
+ |
+ v
+[20] -> [30]
+ ^__________|
+
+--------------------------------------------------------------
+
+9) Advantages of Circular Linked List
+--------------------------------------------------------------
+- No need to restart traversal from beginning
+- Good for cyclic processes
+- Tail can quickly connect back to head
+
+--------------------------------------------------------------
+
+10) Disadvantages of Circular Linked List
+--------------------------------------------------------------
+- Traversal logic is a little tricky
+- Risk of infinite loop
+- Careful stopping condition is needed
+
+--------------------------------------------------------------
+
+11) Time Complexity
+--------------------------------------------------------------
+Operation                  Time
+--------------------------------------------------------------
+Traversal                  O(n)
+Insert at beginning        O(n)   // O(1) if tail maintained
+Insert at end              O(n)   // O(1) if tail maintained
+Delete                     O(n)
+
+--------------------------------------------------------------
+
+12) Real Interview One-Liner
+--------------------------------------------------------------
+A circular linked list is a linked list in which
+the last node points back to the head node,
+forming a circle instead of ending with null.
+
+--------------------------------------------------------------
+
+13) Very Short Revision Note
+--------------------------------------------------------------
+- last node points to head
+- no null at end
+- forms a circle
+- traversal stops when we reach head again
+- useful in cyclic problems
+
+--------------------------------------------------------------
+
+14) Simple Visual Summary
+--------------------------------------------------------------
+head
+ |
+ v
++------+    +------+    +------+
+|  10  | -> |  20  | -> |  30  |
++------+    +------+    +------+
+   ^____________________________|
+
+==============================================================
+*/
