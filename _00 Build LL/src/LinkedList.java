@@ -89,11 +89,6 @@ STEP 1: CREATE HEAD NODE
 ==============================================================
 Node head = new Node(arr[0]);
 
-arr[0] = 2
-
-So:
-head = [2 | null]
-
 List:
 head
  |
@@ -124,15 +119,14 @@ STEP 3: LOOP STARTS
 i = 1
 -------------------------
 arr[1] = 5
-
 Node temp = new Node(5);
-
 temp = [5 | null]
 
 Current:
 head -> [2 | null]
-temp -> [5 | null]
+
 mover -> [2 | null]
+temp -> [5 | null]
 
 Now:
 mover.next = temp;
@@ -160,26 +154,15 @@ head
 -------------------------
 i = 2
 -------------------------
-arr[2] = 8
-
 Node temp = new Node(8);
 
 temp = [8 | null]
 
 Current:
-head -> [2] -> [5]
 mover -> [5]
-temp -> [8]
 
 Now:
 mover.next = temp;
-
-So node 5 points to node 8
-
-List becomes:
-[2 | *] -> [5 | *] -> [8 | null]
-
-Now:
 mover = temp;
 
 So mover shifts to node 8
@@ -197,26 +180,15 @@ head
 -------------------------
 i = 3
 -------------------------
-arr[3] = 7
-
 Node temp = new Node(7);
 
 temp = [7 | null]
 
 Current:
-head -> [2] -> [5] -> [8]
 mover -> [8]
-temp -> [7]
 
 Now:
 mover.next = temp;
-
-So node 8 points to node 7
-
-List becomes:
-[2 | *] -> [5 | *] -> [8 | *] -> [7 | null]
-
-Now:
 mover = temp;
 
 So mover shifts to node 7
