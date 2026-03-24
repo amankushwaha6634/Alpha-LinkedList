@@ -14,9 +14,10 @@ B. and the other being the pointer to the next element. The ‘head’ is the fi
 
 Applications of Linked Lists:
 -------------------------------
-1. Creating Data Structures: Linked lists serve as the foundation for building other dynamic data structures, such as stacks and queues.
-2. Dynamic Memory Allocation: Dynamic memory allocation relies on linked lists to manage and allocate memory blocks efficiently.
-3. Web Browser is one important application of Linked List.
+1. Non-contiguous address location of nodes.
+2. Creating Data Structures: Linked lists serve as the foundation for building other dynamic data structures, such as stacks and queues.
+3. Dynamic Memory Allocation: Dynamic memory allocation relies on linked lists to manage and allocate memory blocks efficiently.
+4. Web Browser is one important application of Linked List.
 
 
 
