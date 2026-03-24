@@ -18,6 +18,19 @@ Applications of Linked Lists:
 2. Creating Data Structures: Linked lists serve as the foundation for building other dynamic data structures, such as stacks and queues.
 3. Dynamic Memory Allocation: Dynamic memory allocation relies on linked lists to manage and allocate memory blocks efficiently.
 4. Web Browser is one important application of Linked List.
+    /*
+    Current browser history:
+
+    Google <-> YouTube <-> LeetCode <-> GitHub
+                            ^
+                          current
+
+    If user clicks Back:
+    current = current.prev
+
+    If user clicks Forward:
+    current = current.next
+    */
 
 
 
