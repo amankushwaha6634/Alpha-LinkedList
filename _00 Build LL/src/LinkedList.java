@@ -53,6 +53,19 @@ public class LinkedList {
         System.out.println("null");
     }
 
+    // function to length of linked list
+    public static void lengthLL(Node head) {
+        Node temp = head;
+        int count =0;
+
+        while (temp != null) {
+            temp = temp.next;
+            count++;
+        }
+
+        System.out.println("Count "+ count);
+    }
+
     public static void main(String[] args) {
         int[] arr = {2, 5, 8, 7};
 
@@ -61,6 +74,9 @@ public class LinkedList {
 
         // print linked list
         printLL(head);
+
+        // length of LL
+        lengthLL(head);
     }
 }
 
