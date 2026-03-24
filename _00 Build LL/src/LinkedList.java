@@ -63,7 +63,7 @@ public class LinkedList {
             count++;
         }
 
-        System.out.println("Count "+ count);
+        System.out.println("Length "+ count);
     }
 
     public static void main(String[] args) {
