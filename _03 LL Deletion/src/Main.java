@@ -149,6 +149,24 @@ class CustomLinkedList {
         }
     }
 
+    /*
+    4) deleteByValue(val)
+        --------------------------------------------------------------
+        - Deletes first node with given value
+
+        Steps:
+        - If head has value → delete first node
+        - Traverse list
+        - Find node with value
+        - Skip it:
+          prev.next = temp.next
+
+        Effect (val=2):
+        Before: [1] -> [2] -> [3]
+        After:  [1] -> [3]
+
+        Time Complexity: O(n)
+     */
     public void deleteByValue(int val) {
         // Check if the list is empty
         if (head == null)
@@ -205,7 +223,21 @@ public class Main {
         list.deleteByValue(7);
         list.printList(); // After deleting the node with value 7
         // 1 -> 3 -> 4 -> 5 -> 6 -> null
-
-
     }
 }
+
+/*
+--------------------------------------------------------------
+KEY POINTS (INTERVIEW)
+--------------------------------------------------------------
+- Always handle edge cases:
+  • empty list
+  • single node
+  • deleting head
+
+- Deletion = "skip the node"
+  → prev.next = temp.next
+
+- No need to explicitly free memory in Java
+==============================================================
+ */
