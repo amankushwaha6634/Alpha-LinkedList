@@ -11,6 +11,22 @@ class CustomLinkedList {
         }
     }
 
+    /*
+    1) addFirst(data)
+        --------------------------------------------------------------
+        - Inserts node at beginning (head)
+
+        Steps:
+        - Create new node
+        - Point newNode.next to current head
+        - Move head to new node
+
+        Effect:
+        Before: [1] -> [2] -> [3]
+        After:  [0] -> [1] -> [2] -> [3]
+
+        Time Complexity: O(1)
+     */
     public void addFirst(int data) {
         Node newNode = new Node(data); // create new node
 
@@ -23,6 +39,22 @@ class CustomLinkedList {
         head = newNode;                // move head to new node
     }
 
+    /*
+    2) addLast(data)
+        --------------------------------------------------------------
+        - Inserts node at end of list
+
+        Steps:
+        - Create new node
+        - Traverse till last node
+        - Set last.next = newNode
+
+        Effect:
+        Before: [1] -> [2] -> [3]
+        After:  [1] -> [2] -> [3] -> [4]
+
+        Time Complexity: O(n)
+     */
     public void addLast(int data) {
         Node newNode = new Node(data); // create new node
 
