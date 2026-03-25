@@ -51,6 +51,23 @@ class CustomDoublyLinkedList {
     /**
      * Deletes the first node of the list.
      */
+    /*
+    1) addFirst(data)
+        --------------------------------------------------------------
+        - Inserts node at beginning (head)
+
+        Steps:
+        - Create new node
+        - newNode.next = head
+        - head.prev = newNode
+        - head = newNode
+
+        Effect:
+        Before: [1] <-> [2] <-> [3]
+        After:  [0] <-> [1] <-> [2] <-> [3]
+
+        Time Complexity: O(1)
+     */
     public void deleteFirst() {
         if (head == null) {
             System.out.println("List is empty");
@@ -67,6 +84,23 @@ class CustomDoublyLinkedList {
 
     /**
      * Deletes the last node of the list.
+     */
+    /*
+    2) addLast(data)
+        --------------------------------------------------------------
+        - Inserts node at end
+
+        Steps:
+        - Create new node
+        - Traverse till last node
+        - last.next = newNode
+        - newNode.prev = last
+
+        Effect:
+        Before: [1] <-> [2] <-> [3]
+        After:  [1] <-> [2] <-> [3] <-> [4]
+
+        Time Complexity: O(n)
      */
     public void deleteLast() {
         if (head == null) {
