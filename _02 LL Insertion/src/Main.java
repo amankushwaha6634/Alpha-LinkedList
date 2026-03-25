@@ -72,6 +72,24 @@ class CustomLinkedList {
         currNode.next = newNode;       // attach new node at end
     }
 
+    /*
+    3) insertByPosition(k, val)
+    --------------------------------------------------------------
+    - Inserts node at position k (1-based index)
+
+    Steps:
+    - If k == 1 → same as addFirst
+    - Traverse till (k-1)th node
+    - Connect:
+      newNode.next = temp.next
+      temp.next = newNode
+
+    Effect (k=2):
+    Before: [1] -> [2] -> [3]
+    After:  [1] -> [X] -> [2] -> [3]
+
+    Time Complexity: O(n)
+     */
     public void insertByPosition(int k, int val) {
         Node newNode = new Node(val);  // create new node
 
