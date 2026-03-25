@@ -178,6 +178,10 @@ class CustomLinkedList {
             return;
         }
 
+        // If execution comes here it definitely
+        // A. means length >= 2
+        // B. deleteable value is not at head.
+        //    So in case node is deletable than prev will be head so prev will never be null.
         // Traverse the list to find the node with the target value
         Node temp = head;
         Node prev = null;
