@@ -115,6 +115,24 @@ class CustomLinkedList {
         }
     }
 
+    /*
+    4) insertBeforeValue(k, val)
+        --------------------------------------------------------------
+        - Inserts node before a given value
+
+        Steps:
+        - If head has target value → insert at beginning
+        - Traverse list
+        - When temp.next.data == target:
+            newNode.next = temp.next
+            temp.next = newNode
+
+        Effect (insert before 2):
+        Before: [1] -> [2] -> [3]
+        After:  [1] -> [X] -> [2] -> [3]
+
+        Time Complexity: O(n)
+     */
     public void insertBeforeValue(int k, int val) {
         Node newNode = new Node(val);  // create new node
 
