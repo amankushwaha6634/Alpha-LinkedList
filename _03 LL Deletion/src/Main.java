@@ -37,6 +37,21 @@ class CustomLinkedList {
         System.out.println("null");
     }
 
+    /*
+    1) deleteFirst()
+        --------------------------------------------------------------
+        - Removes the first node (head) of the list.
+
+        Steps:
+        - If list is empty → nothing to delete
+        - Move head to next node
+
+        Effect:
+        Before: head -> [1] -> [2] -> [3]
+        After:  head -> [2] -> [3]
+
+        Time Complexity: O(1)
+    */
     public void deleteFirst(){
         if (head == null) {
             System.out.println("List is Empty");
@@ -45,6 +60,24 @@ class CustomLinkedList {
         head= head.next;
     }
 
+    /*
+    2) deleteLast()
+        --------------------------------------------------------------
+        - Removes the last node of the list.
+
+        Steps:
+        - If list is empty → return
+        - If only one node → head = null
+        - Otherwise:
+          - Traverse till second last node
+          - Set secondLast.next = null
+
+        Effect:
+        Before: [1] -> [2] -> [3]
+        After:  [1] -> [2]
+
+        Time Complexity: O(n)
+     */
     public void deleteLast(){
         if (head == null) {
             System.out.println("List is Empty");
@@ -64,16 +97,6 @@ class CustomLinkedList {
         }
         // Nullify the connection from the second-to-last node to delete the last node
         temp.next = null;
-
-//        Node secondLastNode = head;
-//        Node lastNode = head.next;  // lastNode = null ( in case only 1 node )
-//
-//        while(lastNode.next != null){  // null.next may be the case if only 1 node is there ( handled above )
-//            lastNode = lastNode.next;
-//            secondLastNode = secondLastNode.next;
-//        }
-//
-//        secondLastNode.next = null;
 
     }
 
