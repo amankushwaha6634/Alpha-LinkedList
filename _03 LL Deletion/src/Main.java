@@ -101,6 +101,24 @@ class CustomLinkedList {
     }
 
 
+    /*
+    3) deleteByPosition(k)
+        --------------------------------------------------------------
+        - Deletes node at position k (1-based index)
+
+        Steps:
+        - If k == 1 → delete first node
+        - Traverse till k-th node
+        - Keep track of previous node
+        - Skip k-th node:
+          prev.next = temp.next
+
+        Effect (k=2):
+        Before: [1] -> [2] -> [3]
+        After:  [1] -> [3]
+
+        Time Complexity: O(n)
+     */
     public void deleteByPosition(int k) {
         // Check if the list is empty
         if (head == null)
@@ -122,7 +140,7 @@ class CustomLinkedList {
             // If the k-th node is found
             if (cnt == k) {
                 // Adjust the pointers to skip the k-th node
-                prev.next = prev.next.next;
+                prev.next = temp.next;
                 break;
             }
             // Move to the next node
@@ -166,22 +184,27 @@ public class Main {
             list.addLast(i);
         }
         list.printList();
+        // 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> null
 
         System.out.println("-------------------------------------------");
 
         list.deleteFirst();
         list.printList();
+        // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> null
 
         list.deleteLast();
         list.printList();
+        // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null
 
         System.out.println("------------------------------------------------------");
 
         list.deleteByPosition(2);
         list.printList(); // After deleting the element at position 2
+        // 1 -> 3 -> 4 -> 5 -> 6 -> 7 -> null
 
         list.deleteByValue(7);
         list.printList(); // After deleting the node with value 7
+        // 1 -> 3 -> 4 -> 5 -> 6 -> null
 
 
     }
