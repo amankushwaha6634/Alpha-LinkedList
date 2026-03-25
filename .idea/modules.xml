@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Alpha-LinkedList.iml" filepath="$PROJECT_DIR$/.idea/Alpha-LinkedList.iml" />
-      <module fileurl="file://$PROJECT_DIR$/_00 Build LL/_00 Build LL.iml" filepath="$PROJECT_DIR$/_00 Build LL/_00 Build LL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_00 InBuild List Method/_00 InBuild List Method.iml" filepath="$PROJECT_DIR$/_00 InBuild List Method/_00 InBuild List Method.iml" />
       <module fileurl="file://$PROJECT_DIR$/_00 Singly LL/_00 Singly LL.iml" filepath="$PROJECT_DIR$/_00 Singly LL/_00 Singly LL.iml" />
-      <module fileurl="file://$PROJECT_DIR$/_01 InBuild List Method/_01 InBuild List Method.iml" filepath="$PROJECT_DIR$/_01 InBuild List Method/_01 InBuild List Method.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_01 Build LL/_01 Build LL.iml" filepath="$PROJECT_DIR$/_01 Build LL/_01 Build LL.iml" />
       <module fileurl="file://$PROJECT_DIR$/_02 LL Insertion/_02 LL Insertion.iml" filepath="$PROJECT_DIR$/_02 LL Insertion/_02 LL Insertion.iml" />
       <module fileurl="file://$PROJECT_DIR$/_03 LL Deletion/_03 LL Deletion.iml" filepath="$PROJECT_DIR$/_03 LL Deletion/_03 LL Deletion.iml" />
       <module fileurl="file://$PROJECT_DIR$/_04 DLL Build/_04 DLL Build.iml" filepath="$PROJECT_DIR$/_04 DLL Build/_04 DLL Build.iml" />
