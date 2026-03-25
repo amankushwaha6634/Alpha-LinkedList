@@ -202,6 +202,32 @@ class CustomDoublyLinkedList {
      * Deletes a node by its value.
      * @param val the value of the node to be deleted.
      */
+    /*
+    4) deleteByValue(val)
+        --------------------------------------------------------------
+        - Deletes first occurrence of value
+
+        Steps:
+        - Traverse to find node
+        - If not found → return
+        - Get:
+            prev = kNode.prev
+            next = kNode.next
+
+        Cases:
+        - Only node → head = null
+        - First node → deleteFirst()
+        - Last node → deleteLast()
+        - Middle node:
+            prev.next = next
+            next.prev = prev
+
+        Effect (val=2):
+        Before: [1] <-> [2] <-> [3]
+        After:  [1] <-> [3]
+
+        Time Complexity: O(n)
+     */
     public void deleteByValue(int val) {
         if (head == null) {
             System.out.println("List is empty");
@@ -273,3 +299,28 @@ public class Main {
         list.printList(); // After deleting the node with value 7
     }
 }
+
+/*
+--------------------------------------------------------------
+
+KEY POINTS (INTERVIEW)
+--------------------------------------------------------------
+- Deletion = "remove node and reconnect both sides"
+- Always update BOTH:
+    prev.next
+    next.prev
+
+- Handle edge cases:
+  • empty list
+  • single node
+  • head deletion
+  • tail deletion
+
+--------------------------------------------------------------
+
+ONE-LINE MEMORY TRICK
+--------------------------------------------------------------
+DLL deletion = "skip node from both directions"
+
+==============================================================
+ */
