@@ -281,22 +281,29 @@ public class Main {
             list.addLast(i);
         }
         list.printList();
+        // 0 <-> 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6 <-> 7 <-> 8 <-> null
 
         System.out.println("-------------------------------------------");
 
         list.deleteFirst();
         list.printList(); // After deleting the first node
+        // 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6 <-> 7 <-> 8 <-> null
 
         list.deleteLast();
         list.printList(); // After deleting the last node
+        // 1 <-> 2 <-> 3 <-> 4 <-> 5 <-> 6 <-> 7 <-> null
 
         System.out.println("------------------------------------------------------");
 
         list.deleteByPosition(2);
         list.printList(); // After deleting the element at position 2
+        // removes element at index 2 (value = 2)
+        //1 <-> 3 <-> 4 <-> 5 <-> 6 <-> 7 <-> null
 
         list.deleteByValue(7);
         list.printList(); // After deleting the node with value 7
+        // removes node with value 7
+        // 1 <-> 3 <-> 4 <-> 5 <-> 6 <-> null
     }
 }
 
