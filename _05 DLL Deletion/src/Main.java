@@ -52,19 +52,20 @@ class CustomDoublyLinkedList {
      * Deletes the first node of the list.
      */
     /*
-    1) addFirst(data)
+        1) deleteFirst()
         --------------------------------------------------------------
-        - Inserts node at beginning (head)
+        - Removes the first node (head)
 
         Steps:
-        - Create new node
-        - newNode.next = head
-        - head.prev = newNode
-        - head = newNode
+        - If list empty → return
+        - If only one node → head = null
+        - Else:
+            head = head.next
+            head.prev = null
 
         Effect:
         Before: [1] <-> [2] <-> [3]
-        After:  [0] <-> [1] <-> [2] <-> [3]
+        After:  [2] <-> [3]
 
         Time Complexity: O(1)
      */
@@ -86,19 +87,20 @@ class CustomDoublyLinkedList {
      * Deletes the last node of the list.
      */
     /*
-    2) addLast(data)
+        2) deleteLast()
         --------------------------------------------------------------
-        - Inserts node at end
+        - Removes the last node
 
         Steps:
-        - Create new node
-        - Traverse till last node
-        - last.next = newNode
-        - newNode.prev = last
+        - If list empty → return
+        - If only one node → head = null
+        - Else:
+            Traverse to last node
+            last.prev.next = null
 
         Effect:
         Before: [1] <-> [2] <-> [3]
-        After:  [1] <-> [2] <-> [3] <-> [4]
+        After:  [1] <-> [2]
 
         Time Complexity: O(n)
      */
