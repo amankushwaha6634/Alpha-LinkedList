@@ -187,29 +187,9 @@ public class Main {
         // list: 1 -> null
 
         list.addFirst(2);
-        // newNode = 2
-        // newNode.next = 1
-        // head = 2
-        // list: 2 -> 1 -> null
-
         list.addFirst(3);
-        // newNode = 3
-        // newNode.next = 2
-        // head = 3
-        // list: 3 -> 2 -> 1 -> null
-
         list.addFirst(4);
-        // newNode = 4
-        // newNode.next = 3
-        // head = 4
-        // list: 4 -> 3 -> 2 -> 1 -> null
-
         list.addFirst(5);
-        // newNode = 5
-        // newNode.next = 4
-        // head = 5
-        // list: 5 -> 4 -> 3 -> 2 -> 1 -> null
-
         list.printList();
         // output: 5 -> 4 -> 3 -> 2 -> 1 -> null
 
@@ -221,41 +201,34 @@ public class Main {
         // list: 5 -> 4 -> 3 -> 2 -> 1 -> 98 -> null
 
         list.addLast(99);
-        // newNode = 99
-        // traverse from 5 to 98
-        // last node is 98
-        // 98.next = 99
-        // list: 5 -> 4 -> 3 -> 2 -> 1 -> 98 -> 99 -> null
-
         list.printList();
         // output: 5 -> 4 -> 3 -> 2 -> 1 -> 98 -> 99 -> null
 
         System.out.println("------------------------------------------------------");
 
         list.insertByPosition(2, 99999);
-        // k = 2, val = 99999
-        // create newNode = 99999
-        // need to insert at position 2
-        // temp starts at head = 5
-        // cnt = 1, and cnt == k-1
-        // newNode.next = temp.next = 4
-        // temp.next = newNode
-        // list: 5 -> 99999 -> 4 -> 3 -> 2 -> 1 -> 98 -> 99 -> null
-
         list.printList();
         // output: 5 -> 99999 -> 4 -> 3 -> 2 -> 1 -> 98 -> 99 -> null
 
         list.insertBeforeValue(99999, 888);
-        // k = 99999, val = 888
-        // create newNode = 888
-        // head.data = 5, not 99999
-        // temp starts at 5
-        // temp.next.data = 99999, target found
-        // newNode.next = temp.next = 99999
-        // temp.next = newNode
-        // list: 5 -> 888 -> 99999 -> 4 -> 3 -> 2 -> 1 -> 98 -> 99 -> null
-
         list.printList();
         // output: 5 -> 888 -> 99999 -> 4 -> 3 -> 2 -> 1 -> 98 -> 99 -> null
     }
 }
+
+/*
+    KEY POINTS (INTERVIEW)
+--------------------------------------------------------------
+        - Insertion = "adjust links without losing nodes"
+        - Always connect new node before breaking old link
+        - Handle edge cases:
+        • empty list
+        • inserting at head
+        • position out of range
+
+        --------------------------------------------------------------
+
+        ONE-LINE MEMORY TRICK
+        --------------------------------------------------------------
+        Insertion = "newNode.next first, then connect previous"
+ */
