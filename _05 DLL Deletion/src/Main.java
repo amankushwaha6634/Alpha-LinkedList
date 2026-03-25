@@ -124,6 +124,32 @@ class CustomDoublyLinkedList {
      * Deletes a node by its position (1-based index).
      * @param k the position of the node to be deleted.
      */
+    /*
+    3) deleteByPosition(k)
+        --------------------------------------------------------------
+        - Deletes node at position k (1-based)
+
+        Steps:
+        - Traverse to kth node
+        - If node not found → return
+        - Get:
+            prev = kNode.prev
+            next = kNode.next
+
+        Cases:
+        - Only node → head = null
+        - First node → deleteFirst()
+        - Last node → deleteLast()
+        - Middle node:
+            prev.next = next
+            next.prev = prev
+
+        Effect (k=2):
+        Before: [1] <-> [2] <-> [3]
+        After:  [1] <-> [3]
+
+        Time Complexity: O(n)
+     */
     public void deleteByPosition(int k) {
         if (head == null) {
             System.out.println("List is empty");
