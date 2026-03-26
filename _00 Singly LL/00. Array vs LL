@@ -1,0 +1,60 @@
+/*
+==============================================================
+ARRAY vs LINKED LIST (COMPARISON WITH EXPLANATION)
+==============================================================
+
+Feature              | Array                          | Linked List
+---------------------------------------------------------------------------
+Memory               | Contiguous                     | Non-contiguous
+                     | Stored in continuous block     | Nodes stored anywhere
+                     | Easy address calculation       | Connected via pointers
+
+---------------------------------------------------------------------------
+Access               | O(1) direct access             | O(n) sequential access
+                     | arr[i] directly accessible     | Need to traverse from head
+
+---------------------------------------------------------------------------
+Insertion            | O(n)                           | O(1) (if pointer known)
+                     | Need to shift elements         | Just change links
+
+---------------------------------------------------------------------------
+Deletion             | O(n)                           | O(1) (if pointer known)
+                     | Shift elements again           | Skip node using pointers
+
+---------------------------------------------------------------------------
+Size                 | Fixed                          | Dynamic
+                     | Needs resizing                 | Grows/shrinks easily
+
+---------------------------------------------------------------------------
+Memory Usage         | Less                           | More
+                     | Only stores data               | Stores data + pointer(s)
+
+---------------------------------------------------------------------------
+Cache Performance    | Good                           | Poor
+                     | Better CPU cache usage         | Nodes scattered in memory
+
+---------------------------------------------------------------------------
+Traversal            | Faster                         | Slower
+                     | Continuous memory helps        | Pointer hopping slows down
+
+---------------------------------------------------------------------------
+Implementation       | Easy                           | Complex
+                     | Simple indexing                | Pointer management tricky
+
+---------------------------------------------------------------------------
+Binary Search        | Possible                       | Not possible
+                     | Because random access          | No direct indexing
+
+---------------------------------------------------------------------------
+Flexibility          | Low                            | High
+                     | Hard to modify structure       | Easy to insert/delete anywhere
+
+---------------------------------------------------------------------------
+QUICK MEMORY TRICK
+---------------------------------------------------------------------------
+Array  → "Indexing king 👑" (fast access)
+
+Linked List → "Pointer king 🔗" (fast modification)
+
+==============================================================
+*/
