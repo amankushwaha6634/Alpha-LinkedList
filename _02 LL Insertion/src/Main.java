@@ -73,45 +73,51 @@ class CustomLinkedList {
     }
 
     /*
-    3) insertByPosition(k, val)
+    3) insertByPosition(k, val)  (USING prev)
     --------------------------------------------------------------
     - Inserts node at position k (1-based index)
 
     Steps:
-    - If k == 1 → same as addFirst
-    - Traverse till (k-1)th node
-    - Connect:
-      newNode.next = temp.next
-      temp.next = newNode
+    - If k == 1 → insert at head
+    - Traverse till kth node
+    - Maintain prev pointer
+    - Insert:
+        prev.next = newNode
+        newNode.next = temp
 
     Effect (k=2):
     Before: [1] -> [2] -> [3]
     After:  [1] -> [X] -> [2] -> [3]
 
     Time Complexity: O(n)
-     */
+    */
     public void insertByPosition(int k, int val) {
+
         Node newNode = new Node(val);  // create new node
 
-        if (k == 1) {                  // if inserting at first position
-            newNode.next = head;       // new node points to current head
-            head = newNode;            // head becomes new node
+        // Insert at head
+        if (k == 1) {
+            newNode.next = head;
+            head = newNode;
             return;
         }
 
-        int cnt = 0;                   // position counter
-        Node temp = head;              // start traversal from head
+        Node temp = head;
+        Node prev = null;
+        int cnt = 0;
 
-        while (temp != null) {         // traverse list
-            cnt++;                     // increase counter
+        while (temp != null) {
+            cnt++;
 
-            if (cnt == k - 1) {        // reached previous position
-                newNode.next = temp.next; // new node points to next node
-                temp.next = newNode;      // previous node points to new node
-                break;                    // insertion done
+            // When kth position reached
+            if (cnt == k) {
+                prev.next = newNode;   // connect prev → newNode
+                newNode.next = temp;   // connect newNode → temp
+                break;
             }
 
-            temp = temp.next;          // move forward
+            prev = temp;       // move prev
+            temp = temp.next;  // move temp
         }
     }
 
