@@ -18,6 +18,23 @@ class CustomDoublyLinkedList {
      * Adds a new node at the beginning of the list.
      * @param data the value to be added at the beginning.
      */
+    /*
+    1) addFirst(data)
+        --------------------------------------------------------------
+        - Inserts node at beginning (head)
+
+        Steps:
+        - Create new node
+        - newNode.next = head
+        - head.prev = newNode
+        - head = newNode
+
+        Effect:
+        Before: [1] <-> [2] <-> [3]
+        After:  [0] <-> [1] <-> [2] <-> [3]
+
+        Time Complexity: O(1)
+     */
     public void addFirst(int data) {
         Node newNode = new Node(data);
         if (head == null) {
@@ -32,6 +49,24 @@ class CustomDoublyLinkedList {
     /**
      * Adds a new node at the end of the list.
      * @param data the value to be added at the end.
+     */
+
+    /*
+    2) addLast(data)
+        --------------------------------------------------------------
+        - Inserts node at end
+
+        Steps:
+        - Create new node
+        - Traverse till last node
+        - last.next = newNode
+        - newNode.prev = last
+
+        Effect:
+        Before: [1] <-> [2] <-> [3]
+        After:  [1] <-> [2] <-> [3] <-> [4]
+
+        Time Complexity: O(n)
      */
     public void addLast(int data) {
         Node newNode = new Node(data);

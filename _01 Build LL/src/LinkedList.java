@@ -23,7 +23,7 @@ public class LinkedList {
         Node head = new Node(arr[0]);
 
         // mover is used to build the list further
-        Node mover = head;
+        Node tail = head;
 
         // start from index 1 because index 0 already used for head
         for (int i = 1; i < arr.length; i++) {
@@ -31,10 +31,10 @@ public class LinkedList {
             Node temp = new Node(arr[i]);
 
             // connect current last node to new node
-            mover.next = temp;
+            tail.next = temp;
 
             // move mover to newly added node
-            mover = temp;
+            tail = temp;
         }
 
         // return head of linked list

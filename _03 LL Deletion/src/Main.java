@@ -130,6 +130,23 @@ class CustomLinkedList {
             return;
         }
 
+        /*
+        Node temp = head;
+        int cnt = 0;
+
+        while (temp != null) {
+            cnt++;
+
+            if (cnt == k - 1) {
+                if (temp.next != null) {
+                    temp.next = temp.next.next;
+                }
+                break;
+            }
+
+            temp = temp.next;
+        } */
+
         // Traverse the list to find the k-th node
         Node temp = head;
         Node prev = null;
