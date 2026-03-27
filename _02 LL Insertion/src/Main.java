@@ -119,48 +119,57 @@ class CustomLinkedList {
             prev = temp;       // move prev
             temp = temp.next;  // move temp
         }
+
+        if(cnt + 1 == k){
+            prev.next = newNode;
+        }
     }
 
     /*
-    4) insertBeforeValue(k, val)
-        --------------------------------------------------------------
-        - Inserts node before a given value
+    4) insertBeforeValue(k, val)  (USING prev)
+    --------------------------------------------------------------
+    - Inserts node before a given value
 
-        Steps:
-        - If head has target value → insert at beginning
-        - Traverse list
-        - When temp.next.data == target:
-            newNode.next = temp.next
-            temp.next = newNode
+    Steps:
+    - If list empty → return
+    - If head has value → insert at beginning
+    - Traverse using prev & temp
+    - When temp.data == k:
+        prev.next = newNode
+        newNode.next = temp
 
-        Effect (insert before 2):
-        Before: [1] -> [2] -> [3]
-        After:  [1] -> [X] -> [2] -> [3]
+    Effect (insert before 2):
+    Before: [1] -> [2] -> [3]
+    After:  [1] -> [X] -> [2] -> [3]
 
-        Time Complexity: O(n)
-     */
+    Time Complexity: O(n)
+    */
     public void insertBeforeValue(int k, int val) {
-        Node newNode = new Node(val);  // create new node
 
-        if (head == null) {            // if list is empty
-            return;                    // nothing to do
-        }
+        Node newNode = new Node(val); // create new node
 
-        if (head.data == k) {          // if target value is at head
-            newNode.next = head;       // new node points to head
-            head = newNode;            // new node becomes head
+        if (head == null) return;
+
+        // If inserting before head
+        if (head.data == k) {
+            newNode.next = head;
+            head = newNode;
             return;
         }
 
-        Node temp = head;              // start from head
+        Node temp = head;
+        Node prev = null;
 
-        while (temp.next != null) {    // move until next node exists
-            if (temp.next.data == k) { // found target value in next node
-                newNode.next = temp.next; // new node points to target node
-                temp.next = newNode;      // current node points to new node
-                break;                    // insertion done
+        while (temp != null) {
+
+            if (temp.data == k) {
+                prev.next = newNode;   // connect prev → newNode
+                newNode.next = temp;   // connect newNode → temp
+                return;
             }
-            temp = temp.next;          // move forward
+
+            prev = temp;
+            temp = temp.next;
         }
     }
 
