@@ -1,11 +1,12 @@
 public class LinkedList {
 
+    Node head; // head of linked list
+
     class Node {
         int data;   // value of node
         Node next;  // points to next node
 
-
-        // constructor: only data
+        // constructor
         public Node(int data1) {
             this.data = data1;
             this.next = null;
@@ -41,23 +42,33 @@ public class LinkedList {
     - tail keeps moving to last inserted node
     ==============================================================
     */
-    public Node convertArrToLL(int[] arr) {
+    public void convertArrToLL(int[] arr) {
 
-        Node head = new Node(arr[0]); // first node
-        Node tail = head;             // tail starts from head
+        // create first node and assign to head
+        head = new Node(arr[0]);
 
+        // tail is used to keep track of last node
+        Node tail = head;
+
+        // create remaining nodes
         for (int i = 1; i < arr.length; i++) {
+
             Node temp = new Node(arr[i]); // create new node
 
-            tail.next = temp; // connect tail to new node
+            tail.next = temp; // connect last node to new node
             tail = temp;      // move tail forward
         }
-
-        return head;
     }
 
-    // function to print linked list
-    public void printLL(Node head) {
+    /*
+    ==============================================================
+    printLL()
+    --------------------------------------------------------------
+    - Prints linked list using head
+    ==============================================================
+    */
+    public void printLL() {
+
         Node temp = head;
 
         while (temp != null) {
@@ -68,8 +79,15 @@ public class LinkedList {
         System.out.println("null");
     }
 
-    // function to find length of linked list
-    public void lengthLL(Node head) {
+    /*
+    ==============================================================
+    lengthLL()
+    --------------------------------------------------------------
+    - Finds length of linked list
+    ==============================================================
+    */
+    public void lengthLL() {
+
         Node temp = head;
         int count = 0;
 
@@ -89,17 +107,16 @@ class Main {
 
         LinkedList ll = new LinkedList();
 
-        // call function using object
-        LinkedList.Node head = ll.convertArrToLL(arr);
+        // create linked list
+        ll.convertArrToLL(arr);
 
         // print linked list
-        ll.printLL(head);
+        ll.printLL();
 
         // print length
-        ll.lengthLL(head);
+        ll.lengthLL();
     }
 }
-
 /*
 ==============================================================
 DRY RUN : CONVERT ARRAY TO LINKED LIST
