@@ -1,48 +1,68 @@
-class Node {
-    int data;   // value of node
-    Node next;  // points to next node
-
-    // constructor: data + next
-    public Node(int data1, Node next1) {
-        this.data = data1;
-        this.next = next1;
-    }
-
-    // constructor: only data
-    public Node(int data1) {
-        this.data = data1;
-        this.next = null;
-    }
-}
-
 public class LinkedList {
 
-    // function to convert array into linked list
-    public static Node convertArrToLL(int[] arr) {
-        // create head node using first array element
-        Node head = new Node(arr[0]);
+    class Node {
+        int data;   // value of node
+        Node next;  // points to next node
 
-        // mover is used to build the list further
-        Node tail = head;
-
-        // start from index 1 because index 0 already used for head
-        for (int i = 1; i < arr.length; i++) {
-            // create new node for current array value
-            Node temp = new Node(arr[i]);
-
-            // connect current last node to new node
-            tail.next = temp;
-
-            // move mover to newly added node
-            tail = temp;
+        // constructor: data + next
+        public Node(int data1, Node next1) {
+            this.data = data1;
+            this.next = next1;
         }
 
-        // return head of linked list
+        // constructor: only data
+        public Node(int data1) {
+            this.data = data1;
+            this.next = null;
+        }
+    }
+
+    /*
+    ==============================================================
+    convertArrToLL(arr)
+    --------------------------------------------------------------
+    - Converts an array into a Singly Linked List
+
+    Steps:
+    - Create head using first array element
+    - Maintain a tail pointer to last node
+    - Traverse remaining array elements
+    - For each element:
+        • create new node
+        • connect tail.next to new node
+        • move tail forward
+
+    Effect:
+    arr = {2, 5, 8, 7}
+
+    Linked List:
+    [2] -> [5] -> [8] -> [7] -> null
+
+    Time Complexity: O(n)
+    Space Complexity: O(n)   // for creating n nodes
+
+    Key Idea:
+    - head always stays at first node
+    - tail keeps moving to last inserted node
+    ==============================================================
+    */
+    public Node convertArrToLL(int[] arr) {
+
+        Node head = new Node(arr[0]); // first node
+        Node tail = head;             // tail starts from head
+
+        for (int i = 1; i < arr.length; i++) {
+            Node temp = new Node(arr[i]); // create new node
+
+            tail.next = temp; // connect tail to new node
+            tail = temp;      // move tail forward
+        }
+
         return head;
     }
 
     // function to print linked list
-    public static void printLL(Node head) {
+    public void printLL(Node head) {
         Node temp = head;
 
         while (temp != null) {
@@ -53,30 +73,35 @@ public class LinkedList {
         System.out.println("null");
     }
 
-    // function to length of linked list
-    public static void lengthLL(Node head) {
+    // function to find length of linked list
+    public void lengthLL(Node head) {
         Node temp = head;
-        int count =0;
+        int count = 0;
 
         while (temp != null) {
-            temp = temp.next;
             count++;
+            temp = temp.next;
         }
 
-        System.out.println("Length "+ count);
+        System.out.println("Length = " + count);
     }
+}
 
+class Main {
     public static void main(String[] args) {
+
         int[] arr = {2, 5, 8, 7};
 
-        // convert array into linked list
-        Node head = convertArrToLL(arr);
+        LinkedList ll = new LinkedList();
+
+        // call function using object
+        LinkedList.Node head = ll.convertArrToLL(arr);
 
         // print linked list
-        printLL(head);
+        ll.printLL(head);
 
-        // length of LL
-        lengthLL(head);
+        // print length
+        ll.lengthLL(head);
     }
 }
 
