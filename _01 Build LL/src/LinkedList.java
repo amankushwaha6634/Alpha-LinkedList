@@ -4,11 +4,6 @@ public class LinkedList {
         int data;   // value of node
         Node next;  // points to next node
 
-        // constructor: data + next
-        public Node(int data1, Node next1) {
-            this.data = data1;
-            this.next = next1;
-        }
 
         // constructor: only data
         public Node(int data1) {
