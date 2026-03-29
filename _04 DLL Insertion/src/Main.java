@@ -181,6 +181,12 @@ class CustomDoublyLinkedList {
             temp = temp.next;  // keep moving temp forward till count != K
         }
 
+        // If kth position not found
+        if (temp == null) {
+            System.out.println("Invalid Position");
+            return;
+        }
+
         // take the node which is before the Kth node
         Node prev = temp.prev;
 
