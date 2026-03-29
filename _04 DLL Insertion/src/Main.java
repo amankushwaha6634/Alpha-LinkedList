@@ -86,6 +86,29 @@ class CustomDoublyLinkedList {
      * Inserts a new node with the given value before the tail of the list.
      * @param val the value to be inserted before the tail.
      */
+    /*
+    3) insertBeforeTail(val)
+        --------------------------------------------------------------
+        - Inserts node just before the last node (tail)
+
+        Steps:
+        - If list empty or only 1 node → use addFirst()
+        - Traverse till tail node
+        - Take secondLast = tail.prev
+        - Insert new node between secondLast and tail
+
+        Connections:
+            newNode.next = tail
+            newNode.prev = tail.prev
+            tail.prev.next = newNode
+            tail.prev = newNode
+
+        Effect:
+        Before: [1] <-> [2] <-> [3]
+        After:  [1] <-> [2] <-> [X] <-> [3]
+
+        Time Complexity: O(n)
+     */
     public void insertBeforeTail(int val) {
         // Create a new node with the given value
         Node newNode = new Node(val);
@@ -113,6 +136,29 @@ class CustomDoublyLinkedList {
      * Inserts a new node with the given value at a specific position in the list.
      * @param k the position to insert the new node (1-based index).
      * @param val the value to be inserted at the specified position.
+     */
+    /*
+        4) insertByPosition(k, val)
+        --------------------------------------------------------------
+        - Inserts node at position k (1-based index)
+
+        Steps:
+        - If k == 1 → insert at beginning using addFirst()
+        - Traverse till kth node
+        - Take prev = temp.prev
+        - Insert new node between prev and temp
+
+        Connections:
+            prev.next = newNode
+            temp.prev = newNode
+            newNode.next = temp
+            newNode.prev = prev
+
+        Effect (k = 2):
+        Before: [1] <-> [2] <-> [3]
+        After:  [1] <-> [X] <-> [2] <-> [3]
+
+        Time Complexity: O(n)
      */
     public void insertByPosition(int k, int val) {
         Node newNode = new Node(val);
@@ -152,6 +198,32 @@ class CustomDoublyLinkedList {
      * Inserts a new node with the given value before a node with a specific value.
      * @param k the value of the node before which the new node is to be inserted.
      * @param val the value to be inserted.
+     */
+
+    /*
+        5) insertBeforeGivenValue(k, val)
+        --------------------------------------------------------------
+        - Inserts node before the node having value k
+
+        Steps:
+        - Traverse till node where temp.data == k
+        - If k not found → return
+        - If target node is head → insert at beginning
+        - Else insert between prev and temp
+
+        Connections:
+            prev.next = newNode
+            temp.prev = newNode
+            newNode.next = temp
+            newNode.prev = prev
+
+        Effect:
+        Before: [1] <-> [2] <-> [3]
+        Insert before 2
+
+        After:  [1] <-> [X] <-> [2] <-> [3]
+
+        Time Complexity: O(n)
      */
     public void insertBeforeGivenValue(int k, int val) {
         Node newNode = new Node(val);
