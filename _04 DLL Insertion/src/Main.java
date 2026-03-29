@@ -322,3 +322,20 @@ public class Main {
         list.printList();
     }
 }
+
+/*
+KEY IDEA
+--------------------------------------------------------------
+DLL insertion always updates 4 links:
+
+1. prev.next
+2. newNode.prev
+3. newNode.next
+4. next.prev
+
+--------------------------------------------------------------
+
+MEMORY TRICK
+--------------------------------------------------------------
+"Break the old link, insert node, reconnect both sides"
+ */
