@@ -206,22 +206,25 @@ class CustomDoublyLinkedList {
      * @param val the value to be inserted.
      */
 
-    /*
+        /*
         5) insertBeforeGivenValue(k, val)
         --------------------------------------------------------------
         - Inserts node before the node having value k
 
         Steps:
+        - If list empty → return
+        - If head.data == k → insert at beginning using addFirst()
         - Traverse till node where temp.data == k
         - If k not found → return
-        - If target node is head → insert at beginning
-        - Else insert between prev and temp
+        - Create new node
+        - Take prev = temp.prev
+        - Insert new node between prev and temp
 
         Connections:
             prev.next = newNode
-            temp.prev = newNode
-            newNode.next = temp
             newNode.prev = prev
+            newNode.next = temp
+            temp.prev = newNode
 
         Effect:
         Before: [1] <-> [2] <-> [3]
@@ -229,53 +232,62 @@ class CustomDoublyLinkedList {
 
         After:  [1] <-> [X] <-> [2] <-> [3]
 
-        Time Complexity: O(n)
-     */
-    public void insertBeforeGivenValue(int k, int val) {
-        Node newNode = new Node(val);
+        Invalid Example:
+        Before: [1] <-> [2] <-> [3]
+        Insert before 10
 
-        // If the list is empty, we cannot insert
+        temp becomes null
+        => "Value 10 not found in the list."
+
+        Time Complexity: O(n)
+
+        Memory Trick:
+        "Find target node, take its prev, then insert in between"
+        */
+    public void insertBeforeGivenValue(int k, int val) {
+
+        // If list is empty
         if (head == null) {
             System.out.println("List is empty. Cannot insert before " + k);
             return;
         }
 
+        // If inserting before head node
+        if (head.data == k) {
+            addFirst(val);
+            return;
+        }
+
         Node temp = head;
 
+        // Traverse till node having value k
         while (temp != null) {
-            // On reaching the data=k position, break out of the loop
+
             if (temp.data == k) {
                 break;
             }
-            temp = temp.next;  // keep moving temp forward till temp.data != k
+
+            temp = temp.next;
         }
 
-        // If k is not found
+        // If value not found
         if (temp == null) {
             System.out.println("Value " + k + " not found in the list.");
             return;
         }
 
-        // If inserting before the head node
-        if (temp == head) {
-            newNode.next = head;
-            head.prev = newNode;
-            head = newNode;
-            return;
-        }
+        // Create node only when actually needed
+        Node newNode = new Node(val);
 
-        // Normal case: inserting before a middle or last node =>
-        // take the node which is before the Kth node
+        // Node before target node
         Node prev = temp.prev;
 
-        // join the new node in between prev and temp
+        // Connect prev ↔ newNode ↔ temp
         prev.next = newNode;
-        temp.prev = newNode;
-
-        // Set newNode's pointers to prev and temp
-        newNode.next = temp;
         newNode.prev = prev;
 
+        newNode.next = temp;
+        temp.prev = newNode;
     }
 
     /**
