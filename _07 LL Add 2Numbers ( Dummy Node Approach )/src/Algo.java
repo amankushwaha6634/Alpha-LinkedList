@@ -18,8 +18,9 @@ public class Algo {
  *         first node  = units place
  *         second node = tens place
  *         third node  = hundreds place
- *********************************************************
+ *********************************************************/
 
+/**
  * 🔹 Problem:
  * - Two linked lists are given
  * - Each node contains one digit

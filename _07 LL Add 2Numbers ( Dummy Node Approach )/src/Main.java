@@ -1,4 +1,4 @@
-class CustomLinkedList {
+class LinkedList {
     Node head;
 
     // Node of linked list
@@ -67,7 +67,7 @@ class CustomLinkedList {
         Time Complexity  : O(max(m, n))
         Space Complexity : O(max(m, n))
     */
-    public CustomLinkedList addTwoNumbers(CustomLinkedList l1, CustomLinkedList l2) {
+    public LinkedList addTwoNumbers(LinkedList l1, LinkedList l2) {
 
         // Pointer for first list
         Node p1 = l1.head;
@@ -106,10 +106,10 @@ class CustomLinkedList {
                 p2 = p2.next;
             }
 
-            // Extract carry
+            // Extract carry ( 12 / 10 = 1 )
             carry = sum / 10;
 
-            // Create node with single digit
+            // Create node with single digit ( 12 % 10 = 2 )
             Node newNode = new Node(sum % 10);
 
             // Attach node to result list
@@ -125,7 +125,7 @@ class CustomLinkedList {
         }
 
         // Final answer list
-        CustomLinkedList result = new CustomLinkedList();
+        LinkedList result = new LinkedList();
 
         // Skip dummy node and point to actual first node
         result.head = dummy.next;
@@ -137,12 +137,12 @@ class CustomLinkedList {
 public class Main {
     public static void main(String[] args) {
 
-        CustomLinkedList list1 = new CustomLinkedList();
+        LinkedList list1 = new LinkedList();
         list1.addLast(3);
         list1.addLast(8);
         list1.addLast(7);
 
-        CustomLinkedList list2 = new CustomLinkedList();
+        LinkedList list2 = new LinkedList();
         list2.addLast(5);
         list2.addLast(4);
         list2.addLast(4);
@@ -154,7 +154,7 @@ public class Main {
         System.out.println("List 2:");
         list2.printList();
 
-        CustomLinkedList result = new CustomLinkedList();
+        LinkedList result = new LinkedList();
         result = result.addTwoNumbers(list1, list2);
 
         System.out.println("Result:");
