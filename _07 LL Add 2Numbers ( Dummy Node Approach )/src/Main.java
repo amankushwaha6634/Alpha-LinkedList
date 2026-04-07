@@ -1,120 +1,247 @@
 class CustomLinkedList {
-    Node head; // Head of the linked list
+    Node head;
 
-    // Definition of a Node in the linked list
+    // Node of linked list
     class Node {
-        int data;      // Data stored in the node
-        Node next;     // Pointer to the next node
+        int data;
+        Node next;
 
-        // Constructor to initialize a node
-        public Node(int data1) {
-            this.data = data1;  // Set the data
-            this.next = null;   // Initialize next as null
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
         }
     }
 
-    // Method to add a node with the given data at the end of the list
+    // Insert node at end
     public void addLast(int data) {
-        Node newNode = new Node(data); // Create a new node
+        Node newNode = new Node(data);
+
+        // If list is empty
         if (head == null) {
-            head = newNode; // If the list is empty, make the new node the head
+            head = newNode;
             return;
         }
-        Node currNode = head;
-        while (currNode.next != null) { // Traverse to the last node
-            currNode = currNode.next;
+
+        Node temp = head;
+
+        // Move till last node
+        while (temp.next != null) {
+            temp = temp.next;
         }
-        currNode.next = newNode; // Attach the new node at the end
+
+        // Attach new node at end
+        temp.next = newNode;
     }
 
-    // Method to print the linked list
+    // Print linked list
     public void printList() {
-        if (head == null) {
-            System.out.println("List is empty");
-            return;
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
         }
-        Node currNode = head;
-        while (currNode != null) { // Traverse and print each node
-            System.out.print(currNode.data + " -> ");
-            currNode = currNode.next;
-        }
-        System.out.println("null"); // End of the list
+
+        System.out.println("null");
     }
 
-    // Method to add two linked lists and return the result as a new list
-    // T - o(m,n) | S - o(m,n)
+    /*
+        addTwoNumbers(l1, l2)
+        ------------------------------------------------------
+        Adds two linked lists digit by digit.
+
+        Example:
+            l1 = 3 -> 8 -> 7
+            l2 = 5 -> 4 -> 4 -> 9
+
+        Calculation:
+            3 + 5 = 8
+            8 + 4 = 12  -> write 2, carry 1
+            7 + 4 + 1 = 12 -> write 2, carry 1
+            0 + 9 + 1 = 10 -> write 0, carry 1
+            remaining carry = 1
+
+        Result:
+            8 -> 2 -> 2 -> 0 -> 1
+
+        Time Complexity  : O(max(m, n))
+        Space Complexity : O(max(m, n))
+    */
     public CustomLinkedList addTwoNumbers(CustomLinkedList l1, CustomLinkedList l2) {
-        Node p1 = l1.head; // Pointer for the first list
-        Node p2 = l2.head; // Pointer for the second list
 
-        Node dummy = new Node(0); // Dummy node to simplify list creation ( can put any value in it )
-        Node current = dummy;     // Pointer to track the result list
+        // Pointer for first list
+        Node p1 = l1.head;
 
-        int carry = 0;            // To store the carry value
+        // Pointer for second list
+        Node p2 = l2.head;
 
-        // Process both linked lists until one of them is fully traversed
+        /*
+            Dummy node helps in easy creation of result list.
+
+            Initially:
+                dummy -> null
+                current points to dummy
+        */
+        Node dummy = new Node(0);
+        Node current = dummy;
+
+        // Stores carry generated during addition
+        int carry = 0;
+
+        // Continue until both lists are completely processed
         while (p1 != null || p2 != null) {
-            int sum = carry; // Start with the carry value
 
+            // Start current sum with previous carry
+            int sum = carry;
+
+            // If first list has node
             if (p1 != null) {
-                sum += p1.data; // Add value from the first list
-                p1 = p1.next;   // Move to the next node in the first list
+                sum = sum + p1.data;
+                p1 = p1.next;
             }
 
+            // If second list has node
             if (p2 != null) {
-                sum += p2.data; // Add value from the second list
-                p2 = p2.next;   // Move to the next node in the second list
+                sum = sum + p2.data;
+                p2 = p2.next;
             }
 
-            carry = sum / 10;  // Update the carry (1 if sum >= 10, else 0)
-            current.next = new Node(sum % 10); // Add the last digit of the sum as a new node
-            current = current.next;           // Move to the next node in the result list
+            // Extract carry
+            carry = sum / 10;
+
+            // Create node with single digit
+            Node newNode = new Node(sum % 10);
+
+            // Attach node to result list
+            current.next = newNode;
+
+            // Move current forward
+            current = current.next;
         }
 
-        // If there's a remaining carry after processing both lists, add it
+        // If carry still remains after loop
         if (carry > 0) {
             current.next = new Node(carry);
         }
 
-        // Create a result list and set its head to the dummy's next
+        // Final answer list
         CustomLinkedList result = new CustomLinkedList();
-        result.head = dummy.next; // Node(0); removed now
 
-        return result; // Return the resultant list
+        // Skip dummy node and point to actual first node
+        result.head = dummy.next;
+
+        return result;
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        // Create the first linked list
+
         CustomLinkedList list1 = new CustomLinkedList();
         list1.addLast(3);
         list1.addLast(8);
         list1.addLast(7);
 
-        // Create the second linked list
         CustomLinkedList list2 = new CustomLinkedList();
         list2.addLast(5);
         list2.addLast(4);
         list2.addLast(4);
         list2.addLast(9);
 
-        // Print the first list
         System.out.println("List 1:");
         list1.printList();
 
-        // Print the second list
         System.out.println("List 2:");
         list2.printList();
 
-        // Add the two lists
-        System.out.println("Result of Addition:");
         CustomLinkedList result = new CustomLinkedList();
         result = result.addTwoNumbers(list1, list2);
+
+        System.out.println("Result:");
         result.printList();
     }
 }
 
+/*
+A. carry
+-----------------
+    - Stores carry generated after addition
+    - Example:
+        8 + 4 = 12
+        digit = 2
+        carry = 1
+
+B. carry = sum / 10
+--------------------
+    - Extract carry from sum
+
+    Example:
+        sum = 17
+        carry = 17/10 = 1
+
+C. sum % 10
+----------------
+    - Extract actual digit to store in linked list
+
+    Example:
+        sum = 17
+        digit = 7
+
+D. if (carry > 0)
+----------------
+    - If carry still remains after loop
+    - Add one extra node
+
+    Example:
+        last sum = 10
+        digit = 0
+        carry = 1
+
+        Add final node with value 1
+*/
+
+
+/*
+    int sum = carry;
+    ----------------
+    - Start current sum with previous carry
+*/
+
+
+/*
+A.  while (p1 != null || p2 != null)
+--------------------------------
+    - Continue until both linked lists are completely processed
+    - Needed because lists may have different sizes
+
+B.  if (p1 != null)
+----------------
+    - Add value from first linked list
+    - Move p1 to next node
+
+C.  if (p2 != null)
+----------------
+    - Add value from second linked list
+    - Move p2 to next node
+*/
+
+
+
+/*
+    Dummy Node
+    -----------------
+    Why used?
+    - Makes insertion easy
+    - Avoids separate handling of first node
+    - Prevents losing head of result list
+
+    Initially:
+        dummy -> null
+        current -> dummy
+
+    At the end:
+        result.head = dummy.next
+*/
 
 //    Node dummy = new Node(0); Why ?
 //    Without a Dummy Node:
