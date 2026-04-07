@@ -242,11 +242,3 @@ C.  if (p2 != null)
     At the end:
         result.head = dummy.next
 */
-
-//    Node dummy = new Node(0); Why ?
-//    Without a Dummy Node:
-//    -------------------------------------------
-//    1. If you don't use a dummy node, you'd need to separately track the head of the result list and make sure you don't lose the reference to it when adding new nodes.
-//    2. As you add nodes, you have to take extra care to point the first node correctly, which introduces additional complexity (e.g., you need to initialize the head separately and make sure it's not lost).
-//    3. "The dummy node is created with a default value (here, 0). This value is not important since the dummy node itself is never part of the final result list".
-//       result.head = dummy.next; // Node(0); removed now
