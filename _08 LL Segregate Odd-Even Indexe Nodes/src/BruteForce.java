@@ -15,37 +15,74 @@ class CustomLinkedList {
         }
     }
 
-    // Method to segregate odd and even indexed nodes using arrays
-    public void segregateOddEvenIndices() { // T : o(2N) S: o(n)
+    /*
+        Using only one extra array:
+
+        Idea:
+        - First store all odd-indexed elements
+        - Then store all even-indexed elements
+        - Finally rewrite linked list using that array
+
+        Example:
+            Original:
+            0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 50
+
+            Odd indices (1,3,5):
+            1, 3, 5
+
+            Even indices (0,2,4,6):
+            0, 2, 4, 50
+
+            Single array:
+            [1, 3, 5, 0, 2, 4, 50]
+
+            Final List:
+            1 -> 3 -> 5 -> 0 -> 2 -> 4 -> 50
+    */
+    public void segregateOddEvenIndices() {
+
+        // If list has 0 or 1 node, no need to change
         if (head == null || head.next == null) {
-            return; // No segregation needed for empty or single-node list
+            return;
         }
 
-        // Step 1: Store data of odd and even indexed nodes in separate arrays
-        List<Integer> oddIndexData = new ArrayList<>();
-        List<Integer> evenIndexData = new ArrayList<>();
-        Node current = head;
+        // Single extra array
+        List<Integer> arr = new ArrayList<>();
 
-        int index = 0; // Start index from 0 (0-based indexing)
+        Node current = head;
+        int index = 0;
+
+        // Step 1: Store odd-indexed elements first
         while (current != null) {
-            if (index % 2 == 0) { // Even index (0, 2, 4,...) corresponds to even-indexed positions
-                evenIndexData.add(current.data); // Add to even-indexed list
-            } else { // Odd index (1, 3, 5,...) corresponds to odd-indexed positions
-                oddIndexData.add(current.data); // Add to odd-indexed list
+            if (index % 2 == 1) {
+                arr.add(current.data);
             }
-            current = current.next; // Move to the next node
+
+            current = current.next;
             index++;
         }
 
-        // Step 2: Reconstruct the linked list with segregated order
-        current = head; // Start from the head
-        for (int data : oddIndexData) {
-            current.data = data; // Replace with odd-indexed data
+        // Step 2: Again traverse and store even-indexed elements
+        current = head;
+        index = 0;
+
+        while (current != null) {
+            if (index % 2 == 0) {
+                arr.add(current.data);
+            }
+
             current = current.next;
+            index++;
         }
-        for (int data : evenIndexData) {
-            current.data = data; // Replace with even-indexed data
+
+        // Step 3: Rewrite linked list from array
+        current = head;
+        int i = 0;
+
+        while (current != null) {
+            current.data = arr.get(i);
             current = current.next;
+            i++;
         }
     }
 
