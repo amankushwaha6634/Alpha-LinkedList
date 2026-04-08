@@ -81,7 +81,7 @@ class CustomLL {
         Node even = head.next;
 
         // Save starting point of even list
-        Node evenHead = head.next;
+        Node evenHeadForFuture = head.next;
 
         /*
             Traverse while:
@@ -109,7 +109,7 @@ class CustomLL {
         }
 
         // Attach even list after odd list
-        odd.next = evenHead;
+        odd.next = evenHeadForFuture;
     }
 }
 
@@ -138,136 +138,6 @@ class CustomLL {
             even.next.next
 
     Otherwise NullPointerException may happen
-
-    ----------------------------------------------------------
-
-    Inside Loop:
-
-    Step 1:
-        odd.next = odd.next.next
-
-    Meaning:
-    - Skip current even node
-    - Connect odd node directly to next odd node
-
-    Example:
-        1 -> 2 -> 3
-
-        becomes
-
-        1 -> 3
-
-    Step 2:
-        odd = odd.next
-
-    Meaning:
-    - Move odd pointer to next odd node
-
-    ----------------------------------------------------------
-
-    Step 3:
-        even.next = even.next.next
-
-    Meaning:
-    - Skip current odd node
-    - Connect even node directly to next even node
-
-    Example:
-        2 -> 3 -> 4
-
-        becomes
-
-        2 -> 4
-
-    Step 4:
-        even = even.next
-
-    Meaning:
-    - Move even pointer to next even node
-
-    ----------------------------------------------------------
-
-    Dry Run:
-
-        1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
-
-    Iteration 1:
-        odd.next = 3
-        even.next = 4
-
-        odd = 3
-        even = 4
-
-        List becomes:
-        1 -> 3 -> 5 -> 6 -> 7
-        2 -> 4 -> 6 -> 7
-
-    Iteration 2:
-        odd.next = 5
-        even.next = 6
-
-        odd = 5
-        even = 6
-
-    Iteration 3:
-        odd.next = 7
-        even.next = null
-
-        odd = 7
-        even = null
-
-    Loop Stops
-
-    ----------------------------------------------------------
-
-    Final Step:
-
-        odd.next = evenHead
-
-    Meaning:
-    - Attach even list after odd list
-
-    Final List:
-        1 -> 3 -> 5 -> 7 -> 2 -> 4 -> 6
-
-    ----------------------------------------------------------
-
-    Important Observation:
-
-    If list length is odd:
-        even becomes null
-
-    Example:
-        1 -> 2 -> 3 -> 4 -> 5
-
-        Final:
-        odd = 5
-        even = null
-
-    If list length is even:
-        even.next becomes null
-
-    Example:
-        1 -> 2 -> 3 -> 4 -> 5 -> 6
-
-        Final:
-        odd = 5
-        even = 6
-        even.next = null
-
-    ----------------------------------------------------------
-
-    Time Complexity:
-        O(N)
-
-    Why?
-    - We traverse linked list only once
-
-    Space Complexity:
-        O(1)
-
-    Why?
-    - No extra array or extra linked list is used
 */
 public class Optimal {
     public static void main(String[] args) {
@@ -292,3 +162,136 @@ public class Optimal {
         list.printList();
     }
 }
+
+/*
+    Dry Run:
+    ------------------------------------------------
+
+    Original List:
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null
+
+    Initially:
+        odd = 1
+        even = 2
+        evenHead = 2
+
+    ------------------------------------------------
+    Iteration 1:
+
+    odd.next = odd.next.next
+
+        1 -> 2 -> 3
+
+    Connect:
+        1 -> 3
+
+    List now:
+        Odd side:
+        1 -> 3 -> 4 -> 5 -> 6 -> 7
+
+    Move odd:
+        odd = 3
+
+    --------------------------------
+
+    even.next = even.next.next
+
+        2 -> 3 -> 4
+
+    Connect:
+        2 -> 4
+
+    List now:
+        Even side:
+        2 -> 4 -> 5 -> 6 -> 7
+
+    Move even:
+        even = 4
+
+    ------------------------------------------------
+    Iteration 2:
+
+    odd.next = odd.next.next
+
+        3 -> 4 -> 5
+
+    Connect:
+        3 -> 5
+
+    Odd side becomes:
+        1 -> 3 -> 5 -> 6 -> 7
+
+    Move odd:
+        odd = 5
+
+    --------------------------------
+
+    even.next = even.next.next
+
+        4 -> 5 -> 6
+
+    Connect:
+        4 -> 6
+
+    Even side becomes:
+        2 -> 4 -> 6 -> 7
+
+    Move even:
+        even = 6
+
+    ------------------------------------------------
+    Iteration 3:
+
+    odd.next = odd.next.next
+
+        5 -> 6 -> 7
+
+    Connect:
+        5 -> 7
+
+    Odd side becomes:
+        1 -> 3 -> 5 -> 7
+
+    Move odd:
+        odd = 7
+
+    --------------------------------
+
+    even.next = even.next.next
+
+        6 -> 7 -> null
+
+    Connect:
+        6 -> null
+
+    Even side becomes:
+        2 -> 4 -> 6
+
+    Move even:
+        even = null
+
+    ------------------------------------------------
+    Loop Stops
+
+    Because:
+        even == null
+
+    ------------------------------------------------
+    Current Situation:
+
+    Odd List:
+        1 -> 3 -> 5 -> 7
+
+    Even List:
+        2 -> 4 -> 6
+
+    ------------------------------------------------
+    Final Connection:
+
+    odd.next = evenHead
+
+        7 -> 2
+
+    Final Linked List:
+        1 -> 3 -> 5 -> 7 -> 2 -> 4 -> 6 -> null
+*/
