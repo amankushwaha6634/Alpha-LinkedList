@@ -236,6 +236,9 @@ After moving fast N times:
     fast = 3
 
 Gap = 2 nodes
+Q Why do we call this a gap of 2?
+ Because fast is 2 moves ahead of slow:
+ A. 1 --(1 step)--> 2 --(2 step)--> 3
 
 Now both move together:
 
@@ -274,4 +277,65 @@ Therefore:
     Then stop loop at fast.next != null
 
 This keeps slow exactly one node before target.
+*/
+
+
+/*
+We stop when fast reaches the last node (not null)
+because we want slow to remain one node before the target node.
+
+Example:
+
+    1 -> 2 -> 3 -> 4 -> 5
+    N = 2
+
+After moving fast 2 steps:
+
+    slow = 1
+    fast = 3
+
+Now move both until:
+
+    fast.next == null
+
+Step 1:
+    slow = 2
+    fast = 4
+
+Step 2:
+    slow = 3
+    fast = 5
+
+Now fast is at last node.
+
+So slow is at 3,
+which is exactly before the node we want to delete (4).
+
+Then we can do:
+
+    slow.next = slow.next.next
+
+------------------------------------------------
+
+If instead we keep moving until:
+
+    fast == null
+
+Then one extra move happens:
+
+    slow = 4
+    fast = null
+
+Now slow itself is on the node to delete.
+
+But to delete a node in singly linked list,
+we need the previous node, not the node itself.
+
+Because deletion is done by changing previous.next:
+
+    previous.next = previous.next.next
+
+So we intentionally stop early,
+when fast is at last node,
+so slow stays one step behind target.
 */
