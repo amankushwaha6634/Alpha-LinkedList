@@ -112,3 +112,49 @@ public class Optimal {
         list.printList();
     }
 }
+
+
+/**
+Why does the linked list not break during the process?
+
+Because while traversing, we never immediately remove or nullify
+current.next.
+
+Example:
+
+    1 -> 0 -> 2 -> 1 -> 0 -> 2
+
+Suppose current is at first node 1.
+
+We do:
+
+    oneTail.next = current
+    oneTail = oneTail.next
+
+But this node still has its original next pointer:
+
+    1 -> 0 -> 2 -> ...
+
+So traversal can still continue safely using:
+
+    current = current.next
+
+We only use the node as part of a new chain,
+but we do NOT cut its old link immediately.
+
+Same for 0-list and 2-list.
+
+Only after the entire traversal is finished, we reconnect:
+
+    zeroTail.next = oneHead.next
+    oneTail.next  = twoHead.next
+    twoTail.next  = null
+
+At that time, old next pointers get overwritten.
+
+Therefore list does not break because:
+
+1. current.next remains unchanged during traversal
+2. Traversal uses original links safely
+3. Final links are changed only after all nodes are processed
+*/
