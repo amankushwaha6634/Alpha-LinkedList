@@ -117,3 +117,95 @@ public class Optimised {
         }
     }
 }
+
+
+/*
+Intuition Behind This Algorithm:
+
+Suppose:
+
+List1 = 1 -> 2 -> 3 -> 4 -> 5
+List2 = 9 -> 4 -> 5
+
+Intersection starts from node 4.
+
+Unique part of List1 = [1, 2, 3]
+Unique part of List2 = [9]
+
+------------------------------------------------
+
+Problem:
+One list may be longer than the other.
+
+So if we move both pointers together from start,
+they will not reach the intersection at same time.
+
+Example:
+
+    t1: 1 -> 2 -> 3 -> 4 -> 5
+    t2: 9 -> 4 -> 5
+
+t1 reaches later because list1 is longer.
+
+------------------------------------------------
+
+Idea:
+Make both pointers travel equal total distance.
+
+How?
+
+When t1 finishes list1,
+send it to start of list2.
+
+When t2 finishes list2,
+send it to start of list1.
+
+So finally:
+
+t1 travels:
+    length(list1) + length(list2)
+
+t2 also travels:
+    length(list2) + length(list1)
+
+Therefore both travel exactly same distance.
+
+------------------------------------------------
+
+Suppose:
+
+List1 = A + C
+List2 = B + C
+
+where:
+
+A = unique nodes of list1
+B = unique nodes of list2
+C = common intersection part
+
+Then:
+
+t1 travels:
+    A + C + B
+
+t2 travels:
+    B + C + A
+
+Both total lengths become same:
+
+    A + C + B = B + C + A
+
+So after covering unequal parts A and B,
+both pointers reach C together.
+
+That is why they meet exactly at intersection node.
+
+------------------------------------------------
+
+If there is NO intersection:
+
+Then both pointers will eventually finish both lists
+and become null at same time.
+
+So loop stops and returns null.
+*/

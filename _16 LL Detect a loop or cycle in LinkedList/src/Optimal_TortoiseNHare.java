@@ -138,3 +138,119 @@ public class Optimal_TortoiseNHare {
  * The loop starts at node 2 and continues in the cycle 2 -> 3 -> 4 -> 5 -> 2 -> ...
  * This is achieved by connecting the last node (5) back to the second node (2).
  */
+
+
+/*
+Intuition Behind Floyd's Cycle Detection Algorithm
+(Tortoise and Hare Algorithm)
+
+We use two pointers:
+
+    slow -> moves 1 step at a time
+    fast -> moves 2 steps at a time
+
+------------------------------------------------
+
+Why does this detect a loop?
+
+If there is NO loop:
+
+    slow and fast keep moving forward
+
+Eventually fast reaches:
+
+    null
+or
+    last node
+
+because fast moves faster.
+
+So loop ends and there is no cycle.
+
+------------------------------------------------
+
+If there IS a loop:
+
+Imagine race track:
+
+    2 -> 3 -> 4 -> 5
+         ^________|
+
+slow moves slowly
+fast moves twice as fast
+
+Inside a cycle, fast can never escape.
+
+Since fast moves faster than slow,
+fast keeps gaining on slow.
+
+Eventually fast catches slow from behind.
+
+Exactly like two runners running in a circle:
+the faster runner will eventually meet the slower runner.
+
+------------------------------------------------
+
+Example:
+
+    1 -> 2 -> 3 -> 4 -> 5
+         ^______________|
+
+Loop starts at 2
+
+Initially:
+
+    slow = 1
+    fast = 1
+
+Step 1:
+
+    slow = 2
+    fast = 3
+
+Step 2:
+
+    slow = 3
+    fast = 5
+
+Step 3:
+
+    slow = 4
+    fast = 3
+
+Step 4:
+
+    slow = 5
+    fast = 5
+
+Now both become equal.
+
+Therefore loop exists.
+
+------------------------------------------------
+
+Why are they guaranteed to meet?
+
+Suppose inside the cycle:
+
+- slow moves 1 step
+- fast moves 2 steps
+
+So every iteration,
+fast gains 1 extra step over slow.
+
+Distance between them keeps decreasing.
+
+Eventually distance becomes 0,
+so they meet.
+
+------------------------------------------------
+
+Key Insight:
+
+No loop:
+    fast reaches null
+
+Loop exists:
+    fast catches slow
+*/
