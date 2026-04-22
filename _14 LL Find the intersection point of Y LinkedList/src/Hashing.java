@@ -107,3 +107,57 @@ public class Hashing {
         }
     }
 }
+
+
+
+/**
+ * 🔹 Time Complexity Analysis:
+ *
+ * Let:
+ *      N1 = number of nodes in first linked list
+ *      N2 = number of nodes in second linked list
+ *
+ * --------------------------------------------------
+ *
+ * Step 1: Insert all nodes of first linked list into HashSet
+ *
+ *      while (head1 != null)
+ *          st.add(head1)
+ *
+ * - We traverse all N1 nodes once
+ * - HashSet insertion takes O(1) average time
+ *
+ * 👉 Time = O(N1)
+ *
+ * --------------------------------------------------
+ *
+ * Step 2: Traverse second linked list and check in HashSet
+ *
+ *      while (head2 != null)
+ *          st.contains(head2)
+ *
+ * - We traverse all N2 nodes once
+ * - HashSet lookup takes O(1) average time
+ *
+ * 👉 Time = O(N2)
+ *
+ * --------------------------------------------------
+ *
+ * Total Time Complexity:
+ *
+ *      O(N1) + O(N2)
+ *
+ * 👉 Final Time Complexity = O(N1 + N2)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Space Complexity Analysis:
+ *
+ * - We store all nodes of first linked list inside HashSet
+ * - In worst case, HashSet stores N1 nodes
+ *
+ * 👉 Space Complexity = O(N1)
+ *
+ * (If instead we stored second linked list in HashSet,
+ * then space would become O(N2))
+ */

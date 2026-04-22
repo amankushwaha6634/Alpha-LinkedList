@@ -62,47 +62,55 @@ class CustomLL2 {
         }
 
         // Step 2: Use slow and fast pointers to find the middle of the list
-        Node slow = head; // Slow pointer moves one step at a time
-        Node fast = head; // Fast pointer moves two steps at a time
-        while (fast != null && fast.next != null) { // 0(n/2)=>fast is moving double only
-            // Purpose: The `fast` pointer traverses the list twice as fast as `slow`.
-            // This ensures that when `fast` reaches the end of the list, `slow` will be
-            // at the midpoint.
-            // If the list has an odd number of nodes, `slow` points to the exact middle node.
-            // If even, it points to the start of the second half.
-            slow = slow.next;       // Move slow pointer forward by one node
-            fast = fast.next.next; // Move fast pointer forward by two nodes
+        Node slow = head;
+        Node fast = head;
+
+/*
+Using:
+    while (fast.next != null && fast.next.next != null)
+
+Now slow stops one node before the middle
+(for odd length) or before second half (for even length)
+
+Examples:
+
+    1 -> 2 -> 3 -> 2 -> 1
+             ^
+           slow = 2
+
+    1 -> 2 -> 2 -> 1
+         ^
+       slow = 2(first)
+*/
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        System.out.println("Middle Node " + slow.data); // For rNd we are in middle
+        System.out.println("Node before second half: " + slow.data);
 
-        // Step 3: Reverse the second half of the list // 0(n/2) => reversing only 2nd half
-        Node secondHalf = reverse(slow); // Reverse the list starting from the middle
-        Node firstHalf = head;          // Keep a pointer to the first half
+// Reverse only the second half
+        Node secondHalf = reverse(slow.next);
 
-        // Save a copy of the reversed half to restore the original list later
+// Keep copy so we can restore later
         Node secondHalfCopy = secondHalf;
 
-        // Step 4: Compare the first and second halves of the list
-        boolean isPalindrome = true; // Assume the list is a palindrome initially
+// Compare first half and reversed second half
+        Node firstHalf = head;
+        boolean isPalindrome = true;
 
-        while (secondHalf != null) { // 0(n/2)=> traversing only 2nd half
-            System.out.println(firstHalf.data+" "+ secondHalf.data);
-            // For rNd : comparing 1st half & reversed 2nd half => What we got => In odd list middle node will be used in comparison in both reveres 2nd half + 1st half
-            // 5 elements there => 2nd list stated from 3rd, so when 2nd list will be traverse because of 3 node in this 3 node of 1st list will be traverse which also include middle.
-
+        while (secondHalf != null) {
             if (firstHalf.data != secondHalf.data) {
-                // If any corresponding values differ, the list is not a palindrome
                 isPalindrome = false;
                 break;
             }
-            // Move both pointers forward
+
             firstHalf = firstHalf.next;
             secondHalf = secondHalf.next;
         }
 
-        // Step 5: Restore the original list structure //  0(n/2) => reversing again only 2nd half
-        reverse(secondHalfCopy); // Reverse the second half again to its original order
+// Restore original linked list
+        slow.next = reverse(secondHalfCopy);
 
         // Step 6: Return the result
         return isPalindrome; // Return true if the list is a palindrome, otherwise false

@@ -43,39 +43,41 @@ class CustomLL4 {
         System.out.println("null"); // End of the list
     }
 
-    // Utility function to check presence of intersection between two linked lists
-    static Node intersectionPresent(Node head1, Node head2) { // T:0(N1+N2) // any one pointer: suppose temp1 pointer can traverse both lists if it reaches null of its list List1 than it will traverse List2 || ( We are not doing 2(N1+N2) because temp2 is also moving simultaneously with temp1 ) || S: 0(1)
-        // Check if either list is null
+    static Node intersectionPresent(Node head1, Node head2) {
+
+        // If any list is empty, no intersection is possible
         if (head1 == null || head2 == null) {
-            return null; // If either list is null, there's no intersection
-        }
-        Node temp1 = head1;
-        Node temp2 = head2;
-
-        // Traverse both lists simultaneously
-        while (temp1 != temp2) {
-            // Check if temp1 is null
-            if (temp1 == null) {
-                // If temp1 reaches null, now restart from head2
-                temp1 = head2;
-            } else {
-                // Otherwise, move to the next node in list1
-                temp1 = temp1.next;
-            }
-
-            // Check if temp2 is null
-            if (temp2 == null) {
-                // If temp2 is null, now restart from head1
-                temp2 = head1;
-            } else {
-                // Otherwise, move to the next node in list2
-                temp2 = temp2.next;
-            }
+            return null;
         }
 
-        // Always through this algorithm:
-        // temp1 and temp2 will either meet at the intersection node, or both will be null if no intersection
-        return temp1;
+        Node t1 = head1;
+        Node t2 = head2;
+
+        while (t1 != t2) {
+
+            // Move both pointers one step ahead
+            t1 = t1.next;
+            t2 = t2.next;
+
+            // If both become same after moving, intersection found
+            if (t1 == t2) {
+                return t1;
+            }
+
+            // If t1 reaches end of first list,
+            // start traversing second list
+            if (t1 == null) {
+                t1 = head2;
+            }
+
+            // If t2 reaches end of second list,
+            // start traversing first list
+            if (t2 == null) {
+                t2 = head1;
+            }
+        }
+
+        return t1;
     }
 
 
