@@ -151,46 +151,6 @@ We use two pointers:
 
 ------------------------------------------------
 
-Why does this detect a loop?
-
-If there is NO loop:
-
-    slow and fast keep moving forward
-
-Eventually fast reaches:
-
-    null
-or
-    last node
-
-because fast moves faster.
-
-So loop ends and there is no cycle.
-
-------------------------------------------------
-
-If there IS a loop:
-
-Imagine race track:
-
-    2 -> 3 -> 4 -> 5
-         ^________|
-
-slow moves slowly
-fast moves twice as fast
-
-Inside a cycle, fast can never escape.
-
-Since fast moves faster than slow,
-fast keeps gaining on slow.
-
-Eventually fast catches slow from behind.
-
-Exactly like two runners running in a circle:
-the faster runner will eventually meet the slower runner.
-
-------------------------------------------------
-
 Example:
 
     1 -> 2 -> 3 -> 4 -> 5
