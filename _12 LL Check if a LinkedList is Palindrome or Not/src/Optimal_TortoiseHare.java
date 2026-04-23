@@ -145,3 +145,116 @@ public class Optimal_TortoiseHare {
         list.printList();
     }
 }
+
+/**
+ * 🎯 Check Palindrome Linked List (Optimal - Reverse 2nd Half) — Algorithm Steps
+ *
+ * 🔹 Problem:
+ * - Check if linked list is palindrome in:
+ *      O(N) time
+ *      O(1) space
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Find middle of list
+ * - Reverse second half
+ * - Compare both halves
+ * - Restore original list
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Handle Edge Case:
+ *
+ *      if (head == null || head.next == null)
+ *          return true
+ *
+ * --------------------------------------------------
+ *
+ * 2. Find Node Before Middle (using slow-fast):
+ *
+ *      slow = head
+ *      fast = head
+ *
+ *      while (fast.next != null && fast.next.next != null)
+ *          slow = slow.next
+ *          fast = fast.next.next
+ *
+ * 👉 slow stops:
+ *      - before middle (odd length)
+ *      - before second half (even length)
+ *
+ * --------------------------------------------------
+ *
+ * 3. Reverse Second Half:
+ *
+ *      secondHalf = reverse(slow.next)
+ *
+ * 👉 Now list becomes:
+ *
+ *      firstHalf -> reversed secondHalf
+ *
+ * --------------------------------------------------
+ *
+ * 4. Compare Both Halves:
+ *
+ *      firstHalf = head
+ *
+ *      while (secondHalf != null)
+ *          if (firstHalf.data != secondHalf.data)
+ *              return false
+ *
+ *          move both pointers
+ *
+ * --------------------------------------------------
+ *
+ * 5. Restore Original List:
+ *
+ *      slow.next = reverse(secondHalfCopy)
+ *
+ * 👉 Important for not modifying original input
+ *
+ * --------------------------------------------------
+ *
+ * 6. Return Result:
+ *
+ *      return true (if all matched)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      1 -> 2 -> 3 -> 2 -> 1
+ *
+ * Step 2:
+ *      slow = 2
+ *
+ * Step 3:
+ *      reverse(3 -> 2 -> 1)
+ *      => 1 -> 2 -> 3
+ *
+ * Step 4:
+ *      compare:
+ *          1 == 1
+ *          2 == 2
+ *          3 == 3
+ *
+ * Result = true
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I find the middle using slow-fast pointers, reverse the second half,
+ * compare both halves, and restore the list, achieving O(N) time
+ * and O(1) space."
+ */
