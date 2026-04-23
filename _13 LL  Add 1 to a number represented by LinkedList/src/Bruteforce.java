@@ -242,7 +242,7 @@ public class Bruteforce {
  *      while (current != null)
  *
  * - In worst case (e.g., 9->9->9), we traverse all nodes
- * - In best case (e.g., 1->2->3), we stop early
+ * - In best case (e.g., 1->2->3),  we stop early
  *
  * 👉 Time = O(N) (worst case)
  *
