@@ -1,132 +1,218 @@
 class CustomLL {
-    Node head; // Head of the linked list
+    Node head;
 
-    // Definition of a Node in the linked list
     class Node {
-        int data;      // Data stored in the node
-        Node next;     // Pointer to the next node
+        int data;
+        Node next;
 
-        // Constructor to initialize a node
         public Node(int data1) {
-            this.data = data1;  // Set the data
-            this.next = null;   // Initialize next as null
+            this.data = data1;
+            this.next = null;
         }
     }
 
-    // Method to add a node with the given data at the end of the list
     public void addLast(int data) {
-        Node newNode = new Node(data); // Create a new node
+        Node newNode = new Node(data);
         if (head == null) {
-            head = newNode; // If the list is empty, make the new node the head
+            head = newNode;
             return;
         }
         Node currNode = head;
-        while (currNode.next != null) { // Traverse to the last node
+        while (currNode.next != null) {
             currNode = currNode.next;
         }
-        currNode.next = newNode; // Attach the new node at the end
+        currNode.next = newNode;
     }
 
-    // Method to print the linked list
     public void printList() {
-        if (head == null) {
-            System.out.println("List is empty");
-            return;
-        }
         Node currNode = head;
-        while (currNode != null) { // Traverse and print each node
+        while (currNode != null) {
             System.out.print(currNode.data + " -> ");
             currNode = currNode.next;
         }
-        System.out.println("null"); // End of the list
+        System.out.println("null");
     }
 
-    // Method to add 1 to the number represented by the linked list
-    public void addOne() { // T: o(3N)- 2 reverse+ 1 traverse for comparing, s: 0(1)
-        // Reverse the linked list to make addition easier from least significant digit
+    // 🔥 USING % and /
+    public void addOne() {
 
-        // head = reverseList(head);  <---- X no need to do it (its gpt code )
-        // See : if we are reversing starting from head.
-        // than only from head.next thing will change... keep it remember.
-        // head will still point to the node that was head.
-        // so no need to do head = reverseList(head);
-        // so no need to touch head.
-        // so no need to change head that was initially.
+        // Reverse list
         Node newHead = reverseList(head);
 
         Node current = newHead;
-        int carry = 1; // We are adding 1 to the number, so the initial carry is 1
+        int carry = 1;
 
-        // Traverse the reversed list and add carry
         while (current != null) {
-            int sum = current.data + carry; // Add carry to the current digit
-            if(sum < 10){
-                current.data = sum;
-                carry = 0;  // If carry is 0, no need to continue the loop
-                break; // Exit the loop early if no carry remains
-            }else{
-                current.data = 0;
-                carry = 1;
+
+            int sum = current.data + carry;
+
+            // 🔥 Core logic using % and /
+            current.data = sum % 10;
+            carry = sum / 10;
+
+            // If no carry, break early
+            if (carry == 0) {
+                break;
             }
-            current = current.next; // Move to the next node
+
+            current = current.next;
         }
 
-        // Reverse the list again to restore the original order
-          newHead = reverseList(newHead); // newHead == head
-        // actually there is no need of "newHead" variable.
+        // Reverse back
+        head = reverseList(newHead);
 
-        // head = reverseList(head); <---- X no need to do it
-        //---------------------------------------------------
-        // Remember => Node newHead = reverseList(head);
-        // we have not changed original "head"
-        // so after again reverse list came back in previous form
-        // but beauty is that in complete process head pointed to the node that was initially head.
-        // so we are back in original state but head is still same
-
-        // If carry is left, we need to add a new node at front
+        // If carry still left → add new node at front
         if (carry > 0) {
-            Node newNode = new Node(carry); // Create a new node for the carry
-
-            newNode.next = head; // Add it to the front of the list
-            head = newNode; // make "newNode" as head
+            Node newNode = new Node(carry);
+            newNode.next = head;
+            head = newNode;
         }
-
     }
 
-    // Method to reverse the linked list
     private Node reverseList(Node head) {
         Node prev = null;
         Node current = head;
+
         while (current != null) {
             Node nextNode = current.next;
             current.next = prev;
             prev = current;
             current = nextNode;
         }
-        return prev; // New head after reversal
+
+        return prev;
     }
 }
 
-// Main class to test the CustomLL class and addOne method
 public class Bruteforce {
     public static void main(String[] args) {
-        // Create the linked list
+
         CustomLL list = new CustomLL();
 
-        // Adding sample nodes to represent a number (e.g., 1 -> 2 -> 3, which represents 123)
         list.addLast(9);
         list.addLast(9);
         list.addLast(9);
 
-        // Print the original list
         System.out.println("Original List:");
         list.printList();
 
-        // Add 1 to the number represented by the linked list
         list.addOne();
 
-        // Print the updated list
-        System.out.println("List after adding 1:");
+        System.out.println("After adding 1:");
         list.printList();
     }
 }
+
+/**
+ * 🎯 Add 1 to Number Represented by Linked List (Using % and /) — Algorithm
+ *
+ * 🔹 Problem:
+ * - Linked list represents a number:
+ *      1 -> 2 -> 3  = 123
+ *
+ * - Add 1 to this number
+ *
+ *      Result:
+ *      1 -> 2 -> 4
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Reverse list → so we can start from least significant digit
+ * - Add 1 with carry
+ * - Use:
+ *      digit = sum % 10
+ *      carry = sum / 10
+ * - Reverse back
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Reverse the linked list:
+ *
+ *      newHead = reverse(head)
+ *
+ * --------------------------------------------------
+ *
+ * 2. Initialize:
+ *
+ *      current = newHead
+ *      carry = 1   // because we are adding 1
+ *
+ * --------------------------------------------------
+ *
+ * 3. Traverse the reversed list:
+ *
+ *      while (current != null)
+ *
+ *          sum = current.data + carry
+ *
+ *          current.data = sum % 10
+ *          carry = sum / 10
+ *
+ *          if (carry == 0)
+ *              break
+ *
+ *          current = current.next
+ *
+ * --------------------------------------------------
+ *
+ * 4. Reverse the list again:
+ *
+ *      head = reverse(newHead)
+ *
+ * --------------------------------------------------
+ *
+ * 5. If carry still remains:
+ *
+ *      create new node with carry
+ *      attach at front:
+ *
+ *      newNode.next = head
+ *      head = newNode
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      9 -> 9 -> 9
+ *
+ * Step 1:
+ *      9 -> 9 -> 9  (reversed same)
+ *
+ * Step 2:
+ *
+ *      sum = 9 + 1 = 10
+ *      digit = 0, carry = 1
+ *
+ *      sum = 9 + 1 = 10
+ *      digit = 0, carry = 1
+ *
+ *      sum = 9 + 1 = 10
+ *      digit = 0, carry = 1
+ *
+ * Step 3:
+ *      reverse back → 0 -> 0 -> 0
+ *
+ * Step 4:
+ *      carry = 1 → add new node
+ *
+ * Final:
+ *      1 -> 0 -> 0 -> 0
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)   (reverse + traverse + reverse)
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I reverse the list to simulate addition from least significant digit,
+ * use modulo and division to handle digit and carry, then reverse back,
+ * achieving O(N) time and O(1) space."
+ */
