@@ -216,3 +216,80 @@ public class Bruteforce {
  * use modulo and division to handle digit and carry, then reverse back,
  * achieving O(N) time and O(1) space."
  */
+
+
+
+/**
+ * 🔹 Time & Space Complexity — Add 1 to Linked List (Using % and /)
+ *
+ * Let:
+ *      N = number of nodes in linked list
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Step 1: Reverse the linked list
+ *
+ *      reverseList(head)
+ *
+ * - Traverses entire list once
+ *
+ * 👉 Time = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Step 2: Add 1 with carry (traversal)
+ *
+ *      while (current != null)
+ *
+ * - In worst case (e.g., 9->9->9), we traverse all nodes
+ * - In best case (e.g., 1->2->3), we stop early
+ *
+ * 👉 Time = O(N) (worst case)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Step 3: Reverse again
+ *
+ *      reverseList(newHead)
+ *
+ * 👉 Time = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Step 4: Optional new node creation
+ *
+ * - Constant time
+ *
+ * 👉 Time = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Total Time Complexity:
+ *
+ *      O(N) + O(N) + O(N)
+ *
+ * 👉 Final Time = O(3N) ≈ O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Space Complexity:
+ *
+ * - No extra data structures used
+ * - Only a few pointers (prev, current, next)
+ *
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Summary:
+ *
+ * 👉 Time Complexity  = O(N)
+ * 👉 Space Complexity = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I reverse the list, perform addition with carry in one pass,
+ * and reverse it back, resulting in O(N) time and O(1) space."
+ */
