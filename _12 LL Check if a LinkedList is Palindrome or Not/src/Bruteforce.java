@@ -108,3 +108,119 @@ public class Bruteforce {
         }
     }
 }
+
+
+/**
+ * 🔹 Time & Space Complexity (Stack Approach - Brute Force)
+ *
+ * Let:
+ *      N = number of nodes in linked list
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Step 1: Push all elements into stack
+ *
+ *      while (temp != null)
+ *          st.push(temp.data)
+ *
+ * - We traverse entire list once
+ *
+ * 👉 Time = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Step 2: Traverse again and compare
+ *
+ *      while (temp != null)
+ *          compare with st.peek()
+ *          st.pop()
+ *
+ * - Again traverse entire list
+ *
+ * 👉 Time = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Total Time Complexity:
+ *
+ *      O(N) + O(N)
+ *
+ * 👉 Final Time = O(2N) ≈ O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Space Complexity:
+ *
+ * - Stack stores all N elements
+ *
+ * 👉 Space = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Summary:
+ *
+ * 👉 Time Complexity  = O(N)
+ * 👉 Space Complexity = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I use a stack to reverse the order virtually and compare
+ * in a second traversal. This takes O(N) time and O(N) space."
+ */
+
+
+
+/*
+Stack Operations Time Complexity:
+
+For Java Stack (internally uses Vector / dynamic array):
+
+--------------------------------------------------
+
+🔹 push() → O(1) (amortized)
+
+- Adds element at top
+- Usually constant time
+- Occasionally resizing happens → O(N), but rare
+
+👉 So overall: O(1) amortized
+
+--------------------------------------------------
+
+🔹 pop() → O(1)
+
+- Removes top element
+- No shifting required
+
+--------------------------------------------------
+
+🔹 peek() → O(1)
+
+- Just returns top element
+- No modification
+
+--------------------------------------------------
+
+🔹 contains() → O(N) (not used here)
+
+--------------------------------------------------
+
+🔹 In your code:
+
+Step 1:
+    push N elements → O(N)
+
+Step 2:
+    peek + pop for N elements → O(N)
+
+👉 Total still = O(N)
+
+--------------------------------------------------
+
+🔹 Final Understanding:
+
+Each stack operation (push, pop, peek) is constant time,
+so overall algorithm remains linear.
+*/
