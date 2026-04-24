@@ -53,26 +53,22 @@ class CustomLL2 {
     }
 
     // Recursive method to add 1 and propagate the carry back
+// Recursive method using % and /
     private int addOneRecursive(Node node) {
-        // Base case: if we reach the end of the list
+
+        // Base case
         if (node == null) {
-            return 1;  // Return carry 1 to propagate back
+            return 1; // initial carry
         }
 
-        // Recursively call the next node
+        // Go till last node
         int carry = addOneRecursive(node.next);
 
-        // If carry is 1, add it to the current node's data
         int sum = node.data + carry;
 
-        // If the sum exceeds 9, set the data to 0 and propagate the carry
-        if (sum >= 10) {
-            node.data = 0;
-            return 1;  // Propagate carry 1
-        } else {
-            node.data = sum;
-            return 0;  // No carry, return 0
-        }
+        // 🔥 Using % and /
+        node.data = sum % 10;
+        return sum / 10;
     }
 }
 
@@ -99,3 +95,120 @@ public class Optimal_Recursion {
         list.printList();
     }
 }
+
+
+/**
+ * 🎯 Add 1 to Number Represented by Linked List (Recursion + % /) — Algorithm
+ *
+ * 🔹 Problem:
+ * - Linked list represents a number:
+ *      1 -> 2 -> 3 = 123
+ *
+ * - Add 1 to it
+ *
+ *      Result:
+ *      1 -> 2 -> 4
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Use recursion to reach last node (least significant digit)
+ * - While backtracking:
+ *      add carry
+ *      update digit using % 10
+ *      propagate carry using / 10
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Call recursive function:
+ *
+ *      carry = addOneRecursive(head)
+ *
+ * --------------------------------------------------
+ *
+ * 2. Base Case:
+ *
+ *      if (node == null)
+ *          return 1   // initial carry (we are adding 1)
+ *
+ * --------------------------------------------------
+ *
+ * 3. Recursive Call:
+ *
+ *      carry = addOneRecursive(node.next)
+ *
+ * 👉 This ensures we reach LAST node first
+ *
+ * --------------------------------------------------
+ *
+ * 4. Backtracking Step:
+ *
+ *      sum = node.data + carry
+ *
+ *      node.data = sum % 10   // update digit
+ *      carry = sum / 10       // propagate carry
+ *
+ *      return carry
+ *
+ * --------------------------------------------------
+ *
+ * 5. After recursion completes:
+ *
+ *      if (carry == 1)
+ *          create new node with value 1
+ *          attach at front:
+ *
+ *          newNode.next = head
+ *          head = newNode
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      9 -> 9 -> 9
+ *
+ * Step 1:
+ *      Reach end → return carry = 1
+ *
+ * Step 2 (Backtracking):
+ *
+ *      Last node:
+ *          9 + 1 = 10 → digit = 0, carry = 1
+ *
+ *      Middle node:
+ *          9 + 1 = 10 → digit = 0, carry = 1
+ *
+ *      First node:
+ *          9 + 1 = 10 → digit = 0, carry = 1
+ *
+ * Step 3:
+ *      carry = 1 → add new node
+ *
+ * Final:
+ *      1 -> 0 -> 0 -> 0
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(N)   // recursion stack
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - Recursion naturally processes list from right → left
+ * - No need to reverse the list
+ * - Carry flows backward during recursion unwind
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I use recursion to reach the least significant digit,
+ * then propagate carry backward using modulo and division,
+ * achieving O(N) time and O(N) stack space."
+ */
