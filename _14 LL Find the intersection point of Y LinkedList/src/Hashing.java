@@ -161,3 +161,103 @@ public class Hashing {
  * (If instead we stored second linked list in HashSet,
  * then space would become O(N2))
  */
+
+
+/*
+Why do we use HashSet here?
+
+Because we want to quickly answer:
+
+    "Is this node already present in the other list?"
+
+--------------------------------------------------
+
+Problem:
+
+We have 2 linked lists:
+
+    List1: 1 -> 2 -> 3
+    List2: 4 -> 5 -> 2 -> 3
+
+We need to find:
+👉 first common node (by reference, not value)
+
+--------------------------------------------------
+
+Why HashSet specifically?
+
+Because it gives:
+
+    st.contains(node) → O(1)
+
+So lookup becomes very fast.
+
+--------------------------------------------------
+
+
+In short:
+
+👉 HashSet is used for FAST lookup of visited nodes
+
+--------------------------------------------------
+
+Summary:
+
+Without HashSet:
+    O(N1 * N2)
+
+With HashSet:
+    O(N1 + N2)
+
+--------------------------------------------------
+
+Interview Line:
+
+"I use a HashSet to store nodes of one list so I can
+check intersection in constant time while traversing the other list."
+*/
+
+
+
+/*
+🔹 HashSet Operations Time Complexity (Java)
+
+--------------------------------------------------
+| Operation        | Average Case | Worst Case     |
+--------------------------------------------------
+| add(x)           | O(1)         | O(N)           |
+| remove(x)        | O(1)         | O(N)           |
+| contains(x)      | O(1)         | O(N)           |
+| size()           | O(1)         | O(1)           |
+| isEmpty()        | O(1)         | O(1)           |
+| iterator()       | O(N)         | O(N)           |
+--------------------------------------------------
+
+🔹 Why Worst Case = O(N)?
+
+- Due to hash collisions
+- All elements go into same bucket (rare)
+
+--------------------------------------------------
+
+🔹 Why Average = O(1)?
+
+- Hashing distributes elements uniformly
+- Direct bucket access
+
+--------------------------------------------------
+
+🔹 In Your Problem (Intersection):
+
+- add() used N1 times → O(N1)
+- contains() used N2 times → O(N2)
+
+👉 Total = O(N1 + N2)
+
+--------------------------------------------------
+
+🔹 Interview Line:
+
+"HashSet provides O(1) average time for insert and lookup,
+which helps reduce intersection problem from O(N²) to O(N)."
+*/
