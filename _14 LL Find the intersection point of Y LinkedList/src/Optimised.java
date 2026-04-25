@@ -96,6 +96,13 @@ public class Optimised {
         list2.addLast(4);
         list2.addLast(5);
         list2.head.next.next = list1.head.next; // Creating intersection at node 2
+        /*
+        List1:
+                1 --------> 2 --------> 3 --------> null
+                            ^
+                            |
+        List2:  4 ----> 5 --|
+         */
 
         // Print both linked lists
         System.out.println("List 1:");
