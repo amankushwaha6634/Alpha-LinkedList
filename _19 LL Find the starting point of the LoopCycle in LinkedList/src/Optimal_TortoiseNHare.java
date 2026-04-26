@@ -172,31 +172,59 @@ public class Optimal_TortoiseNHare {
 }
 
 /*
- * Linked List with a Loop:
- *
- * 1 -> 2 -> 3 -> 4 -> 5
- *      ^______________|
- *
- * The loop starts at node 2 and continues in the cycle 2 -> 3 -> 4 -> 5 -> 2 -> ...
- * This is achieved by connecting the last node (5) back to the second node (2).
- */
+🔹 Start Node of Cycle (Using HashSet) — Complexity
 
-//
-//Phase 1: Loop Detection
-//        1. The Tortoise and Hare algorithm uses two pointers:
-//              slow moves one step at a time.
-//              fast moves two steps at a time.
-//        2. In the worst case, the fast pointer traverses the entire list until it either finds the loop or reaches the end of the list.
-//        3. If there is a loop, slow and fast will meet after traversing a portion of the loop.
-//             This takes O(N) time because the fast pointer effectively skips one node per iteration.
-//        4. If there is no loop, the while loop terminates after O(N) steps.
+--------------------------------------------------
+| Metric              | Complexity               |
+--------------------------------------------------
+| Time Complexity     | O(N)                     |
+| Space Complexity    | O(N)                     |
+--------------------------------------------------
 
-//Phase 2: Finding the Start of the Cycle
-//        1. Once a loop is detected, the slow pointer is reset to the head of the list, and both slow and fast pointers move one step at a time.
-//        2. The distance traveled in this phase is at most the size of the loop or the distance from the head to the start of the loop, which is also O(N) in the worst case.
+🔹 Why Time = O(N)?
 
-//        Overall Time Complexity :
-//        Both Phase 1 and Phase 2 are linear operations.
-//        Therefore, the overall time complexity is:
-//        ----------------------------------------------
-//        O(N)+O(N)=O(N)
+- We traverse each node only once
+- For each node:
+      contains() → O(1)
+      add()      → O(1)
+
+👉 Total = O(N)
+
+--------------------------------------------------
+
+🔹 Why Space = O(N)?
+
+- We store visited nodes in HashSet
+- In worst case (no loop):
+      all N nodes stored
+
+👉 Space = O(N)
+
+--------------------------------------------------
+
+🔹 Important Case:
+
+Case 1: No Loop
+    Traverse entire list → O(N)
+    Store all nodes → O(N)
+
+Case 2: Loop Exists
+    Traverse until loop repeats
+    Still at most N steps
+
+👉 Time remains O(N)
+
+--------------------------------------------------
+
+🔹 Key Insight:
+
+- HashSet gives O(1) lookup
+- Helps detect first repeated node (cycle start)
+
+--------------------------------------------------
+
+🔹 Interview Line:
+
+"Using HashSet, we detect the cycle start in O(N) time
+with O(N) extra space due to storing visited nodes."
+*/
