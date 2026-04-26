@@ -141,3 +141,96 @@ public class Bruteforce {
  * The loop starts at node 2 and continues in the cycle 2 -> 3 -> 4 -> 5 -> 2 -> ...
  * This is achieved by connecting the last node (5) back to the second node (2).
  */
+
+/**
+ * 🎯 Detect Loop in Linked List (Using HashMap) — Algorithm Steps
+ *
+ * 🔹 Problem:
+ * - Detect whether a linked list contains a loop (cycle)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - While traversing the list,
+ *   store each visited node in a HashMap
+ *
+ * - If a node is visited again,
+ *   it means we have entered a loop
+
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - A loop means revisiting same node
+ * - HashMap helps detect repetition instantly
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I use a HashMap to store visited nodes and detect repetition,
+ * which indicates a cycle, achieving O(N) time and O(N) space."
+ */
+
+
+/*
+🔹 Map (HashMap) Operations Time Complexity (Java)
+
+--------------------------------------------------------------
+| Operation            | Average Case        | Worst Case     |
+--------------------------------------------------------------
+| put(key, value)      | O(1)                | O(N)           |
+| get(key)             | O(1)                | O(N)           |
+| containsKey(key)     | O(1)                | O(N)           |
+| remove(key)          | O(1)                | O(N)           |
+| size()               | O(1)                | O(1)           |
+| isEmpty()            | O(1)                | O(1)           |
+| keySet()/values()    | O(N)                | O(N)           |
+| entrySet()           | O(N)                | O(N)           |
+--------------------------------------------------------------
+
+🔹 Why Worst Case = O(N)?
+
+- Due to hash collisions
+- Many keys go into same bucket
+- Then operations become linear search
+
+--------------------------------------------------------------
+
+🔹 Why Average = O(1)?
+
+- Hashing distributes keys across buckets
+- Direct access to bucket using hash
+
+--------------------------------------------------------------
+
+🔹 Java 8+ Improvement 🔥
+
+- If too many collisions happen:
+      Linked List → Balanced Tree (Red-Black Tree)
+
+👉 Worst case improves to O(log N) (instead of pure O(N))
+
+--------------------------------------------------------------
+
+🔹 In Your Loop Detection Problem:
+
+- put() used N times → O(N)
+- containsKey() used N times → O(N)
+
+👉 Total = O(N)
+
+--------------------------------------------------------------
+
+🔹 Interview Line:
+
+"HashMap provides O(1) average time for insert and lookup.
+In worst case, due to collisions, it can degrade,
+but Java optimizes it using trees to O(log N)."
+*/
