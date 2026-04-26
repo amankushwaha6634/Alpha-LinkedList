@@ -42,7 +42,7 @@
     }
 
     // Function to find the middle node of a linked list using slow and fast pointers
-    public Node findMiddle() { // T: O(N/2) | S: O(1)
+    static Node findMiddle(Node head) { // T: O(N/2) | S: O(1)
         // If the list is empty, return null
         if (head == null) {
             return null;
@@ -88,7 +88,7 @@ public class Optimal_TortoiseandHare {
         list.printList();
 
         // Find the middle node using the slow and fast pointer technique
-        CustomLL2.Node middleNode = list.findMiddle(); // Instance method call
+        CustomLL2.Node middleNode = CustomLL2.findMiddle(list.head); // class method call
 
         // Print the middle node
         if (middleNode != null) {
@@ -98,3 +98,128 @@ public class Optimal_TortoiseandHare {
         }
     }
 }
+
+
+/**
+ * 🎯 Find Middle of Linked List (Tortoise & Hare) — Algorithm Idea
+ *
+ * 🔹 Problem:
+ * - Find the middle node of a singly linked list
+ *
+ * Example:
+ *      1 -> 2 -> 3 -> 4 -> 5
+ *                 ^
+ *               answer = 3
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Use two pointers:
+ *
+ *      slow → moves 1 step
+ *      fast → moves 2 steps
+ *
+ * - When fast reaches end,
+ *   slow will be at middle
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Why this works?
+ *
+ * - fast moves twice as fast as slow
+ *
+ * So:
+ *
+ *      when fast completes full list
+ *      slow completes half list
+ *
+ * 👉 Half of list = middle position
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Handle edge case:
+ *
+ *      if (head == null)
+ *          return null
+ *
+ * --------------------------------------------------
+ *
+ * 2. Initialize pointers:
+ *
+ *      slow = head
+ *      fast = head
+ *
+ * --------------------------------------------------
+ *
+ * 3. Traverse:
+ *
+ *      while (fast != null && fast.next != null)
+ *
+ *          slow = slow.next
+ *          fast = fast.next.next
+ *
+ * --------------------------------------------------
+ *
+ * 4. Loop ends when:
+ *
+ *      fast reaches end
+ *
+ * 👉 slow will be at middle
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      1 -> 2 -> 3 -> 4 -> 5
+ *
+ * Step 1:
+ *      slow = 1, fast = 1
+ *
+ * Step 2:
+ *      slow = 2, fast = 3
+ *
+ * Step 3:
+ *      slow = 3, fast = 5
+ *
+ * Step 4:
+ *      fast.next = null → stop
+ *
+ * 👉 slow = 3 (middle)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Even Length Case:
+ *
+ *      1 -> 2 -> 3 -> 4
+ *
+ * Movement:
+ *
+ *      slow = 2, fast = 3
+ *      slow = 3, fast = null
+ *
+ * 👉 slow = 3 (RIGHT middle)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - Fast pointer acts like a "speed runner"
+ * - Slow pointer acts like a "walker"
+ * - When runner finishes, walker reaches midpoint
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I use slow and fast pointers where fast moves twice as fast.
+ * When fast reaches the end, slow naturally lands at the middle."
+ */
