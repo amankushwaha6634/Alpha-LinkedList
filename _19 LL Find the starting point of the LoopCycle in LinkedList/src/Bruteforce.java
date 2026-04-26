@@ -1,36 +1,33 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 class CustomLL1 {
     Node head; // Head of the linked list
 
-    // Definition of a Node in the linked list
     class Node {
-        int data;      // Data stored in the node
-        Node next;     // Pointer to the next node
+        int data;
+        Node next;
 
-        // Constructor to initialize a node
         public Node(int data1) {
-            this.data = data1;  // Set the data
-            this.next = null;   // Initialize next as null
+            this.data = data1;
+            this.next = null;
         }
     }
 
-    // Method to add a node with the given data at the end of the list
     public void addLast(int data) {
-        Node newNode = new Node(data); // Create a new node
+        Node newNode = new Node(data);
         if (head == null) {
-            head = newNode; // If the list is empty, make the new node the head
+            head = newNode;
             return;
         }
         Node currNode = head;
-        while (currNode.next != null) { // Traverse to the last node
+        while (currNode.next != null) {
             currNode = currNode.next;
         }
-        currNode.next = newNode; // Attach the new node at the end
+        currNode.next = newNode;
     }
 
-    // Method to print the linked list
+    // 🔥 Using Set instead of Map
     public void printList() {
         if (head == null) {
             System.out.println("List is empty");
@@ -38,130 +35,103 @@ class CustomLL1 {
         }
 
         Node currNode = head;
-        Map<Node, Integer> visitedNodes = new HashMap<>(); // Map to track visited nodes
+        Set<Node> visited = new HashSet<>();
 
-        while (currNode != null) { // Traverse and print each node
-            // Check if the current node has already been visited
-            if (visitedNodes.containsKey(currNode)) {
+        while (currNode != null) {
+
+            if (visited.contains(currNode)) {
                 System.out.println("Loop detected. Stopping printing.");
-                break; // Stop printing to avoid infinite loop
+                break;
             }
 
             System.out.print(currNode.data + " -> ");
-            visitedNodes.put(currNode, 1); // Mark the current node as visited
+            visited.add(currNode);
             currNode = currNode.next;
         }
 
         System.out.println("null");
     }
 
-    // Method to detect a loop in the linked list
+    // 🔥 Using Set instead of Map
     public boolean detectLoop() { // T: O(N) | S: O(N)
-        // T: 0(N x 2 Map operation (insert, find) cost maybe log/constant ) => 0(N) | lets take constant for that. || S : 0(N) To store all nodes
 
-        // Step 1: Initialize a pointer 'temp' at the head of the linked list
         Node temp = head;
+        Set<Node> visited = new HashSet<>();
 
-        // Step 2: Create a map to keep track of visited nodes
-        // The key in the map is the node reference, and the value is a marker (e.g., integer 1)
-        Map<Node, Integer> nodeMap = new HashMap<>();
-
-        // Step 3: Traverse the linked list
         while (temp != null) {
-            // Step 4: Check if the current node has already been visited
-            if (nodeMap.containsKey(temp)) {
-                // If the node is found in the map, it indicates a loop
+
+            if (visited.contains(temp)) {
                 return true;
             }
 
-            // Step 5: Add the current node to the map to mark it as visited
-            nodeMap.put(temp, 1);
-
-            // Step 6: Move to the next node in the linked list
+            visited.add(temp);
             temp = temp.next;
         }
 
-        // Step 7: If we reach the end of the list (null), no loop is detected
         return false;
     }
 
-    // Function to detect a loop in a linked list and return the starting node of the loop
+    // 🔥 START NODE using Set (your required)
     public Node startNodeOfCycle() { // T: O(N) | S: O(N)
-        // T: 0(N x 2 Map operation (insert, find) cost maybe log/constant ) => 0(N) | lets take constant for that. || S : 0(N) To store all nodes
 
-        // Use temp to traverse the linked list
         Node temp = head;
+        Set<Node> set = new HashSet<>();
 
-        // HashMap to store all visited nodes
-        HashMap<Node, Integer> nodeMap = new HashMap<>();
-
-        // Traverse the list using temp
         while (temp != null) {
-            // Check if temp has been encountered again
-            if (nodeMap.containsKey(temp)) {
-                // A loop is detected, hence return temp
+
+            if (set.contains(temp)) {
                 return temp;
             }
 
-            // Store temp as visited
-            nodeMap.put(temp, 1);
-
-            // Iterate through the list
+            set.add(temp);
             temp = temp.next;
         }
 
-        // If no loop is detected, return null
         return null;
     }
 }
 
-// Main class to test the CustomLL1 class
+// Main class
 public class Bruteforce {
     public static void main(String[] args) {
-        // Create a linked list
+
         CustomLL1 list = new CustomLL1();
 
-        // Adding sample nodes to the list
         list.addLast(1);
         list.addLast(2);
         list.addLast(3);
         list.addLast(4);
         list.addLast(5);
 
-        // Creating a loop in the list by manually linking the last node to the second node
+        // Create loop at node 2
         CustomLL1.Node temp = list.head;
         CustomLL1.Node loopNode = null;
-        int position = 2; // We want to create the loop starting at position 2 (second node)
+        int position = 2;
 
-        // Traverse the list and find the node at the specified position
         while (temp != null) {
             position--;
             if (position == 0) {
-                loopNode = temp; // Mark the second node
+                loopNode = temp;
             }
             temp = temp.next;
         }
 
-        // Create a loop by linking the last node to the second node
         if (loopNode != null) {
             temp = list.head;
-            while (temp != null && temp.next != null) { // reach last node using temp
+            while (temp.next != null) {
                 temp = temp.next;
             }
-            // Link the last node's next to the loopNode (second node)
             temp.next = loopNode;
         }
 
-        // Print the linked list (will cause an infinite loop, but we're checking for the loop)
         System.out.println("List (with loop):");
         list.printList();
 
-        // Check for loop in the list
-        boolean hasLoop = list.detectLoop(); // Using list.detectLoop() instead
+        boolean hasLoop = list.detectLoop();
         System.out.println("Does the list have a loop? " + (hasLoop ? "Yes" : "No"));
 
-        // Detect and print the starting node of the cycle
-        CustomLL1.Node cycleStartNode = list.startNodeOfCycle(); // Using list.startNodeOfCycle()
+        CustomLL1.Node cycleStartNode = list.startNodeOfCycle();
+
         if (cycleStartNode != null) {
             System.out.println("Cycle starts at node with data: " + cycleStartNode.data);
         } else {
@@ -169,13 +139,3 @@ public class Bruteforce {
         }
     }
 }
-
-/*
- * Linked List with a Loop:
- *
- * 1 -> 2 -> 3 -> 4 -> 5
- *      ^______________|
- *
- * The loop starts at node 2 and continues in the cycle 2 -> 3 -> 4 -> 5 -> 2 -> ...
- * This is achieved by connecting the last node (5) back to the second node (2).
- */
