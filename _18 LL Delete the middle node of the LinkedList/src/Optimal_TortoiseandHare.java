@@ -123,3 +123,85 @@ public class Optimal_TortoiseandHare {
         list.printList();
     }
 }
+
+/**
+ * 🎯 Delete Middle Node (Using slow-fast + prev pointer) — Algorithm
+ *
+ * 🔹 Problem:
+ * - Delete the middle node of a linked list
+ *
+ * Example:
+ *      1 -> 2 -> 3 -> 4 -> 5
+ *                ^
+ *            delete 3
+ *
+ * Result:
+ *      1 -> 2 -> 4 -> 5
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Use slow & fast pointer to find middle
+ * - Use prev pointer to track node before slow
+ * - Delete middle using:
+ *
+ *      prev.next = slow.next
+ *
+ * --------------------------------------------------
+ *
+ *
+ * 🔹 Dry Run:
+ *
+ *      1 -> 2 -> 3 -> 4 -> 5
+ *
+ * Step 1:
+ *      slow = 1, fast = 1
+ *
+ * Step 2:
+ *      prev = 1, slow = 2, fast = 3
+ *
+ * Step 3:
+ *      prev = 2, slow = 3, fast = 5
+ *
+ * Step 4:
+ *      fast.next = null → stop
+ *
+ * 👉 slow = 3 (middle)
+ * 👉 prev = 2
+ *
+ * Delete:
+ *      2.next = 4
+ *
+ * Result:
+ *      1 -> 2 -> 4 -> 5
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Even Case:
+ *
+ *      1 -> 2 -> 3 -> 4
+ *
+ * Result:
+ *      delete 3 (right middle)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - prev helps us remove node without extra traversal
+ * - slow always reaches middle
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I track previous node along with slow-fast pointers
+ * so I can delete the middle node in one traversal."
+ */
