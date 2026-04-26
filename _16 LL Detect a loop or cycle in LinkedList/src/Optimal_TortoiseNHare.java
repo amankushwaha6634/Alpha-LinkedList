@@ -55,7 +55,7 @@ class CustomLL2 {
         System.out.println("null");
     }
 
-    // Method to detect a loop in the linked list using Tortoise and Hare algorithm
+    // Method to detect a loo6p in the linked list using Tortoise and Hare algorithm
     public boolean detectLoop() { // T:0(N) s:0(1)
         // Step 1: Initialize two pointers, slow and fast, at the head
         Node slow = head;
