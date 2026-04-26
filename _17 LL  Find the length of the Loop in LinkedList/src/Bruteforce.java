@@ -85,7 +85,7 @@ class CustomLL1 {
         Node temp = head;
 
         // Step 3: Initialize a timer variable to track the traversal sequence of nodes.
-        int timer = 0;
+        int timer = 1;
 
         // Step 4: Traverse the linked list while the current node (temp) is not null.
         while (temp != null) {
@@ -161,3 +161,64 @@ public class Bruteforce {
         System.out.println("Length of the loop: " + loopLength);
     }
 }
+
+
+/**
+ * 🎯 Length of Loop in Linked List (Using HashMap) — Algorithm
+ *
+ * 🔹 Core Idea:
+ * - Store node with "time/index"
+ * - When node repeats → loop found
+ * - Loop length = current_time - first_time_seen
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Initialize:
+ *
+ *      temp = head
+ *      timer = 0
+ *      map = empty HashMap<Node, Integer>
+ *
+ * --------------------------------------------------
+ *
+ * 2. Traverse:
+ *
+ *      while (temp != null)
+ *
+ * --------------------------------------------------
+ *
+ * 3. Check repetition:
+ *
+ *      if (map.containsKey(temp))
+ *
+ *          loopLength = timer - map.get(temp)
+ *          return loopLength
+ *
+ * --------------------------------------------------
+ *
+ * 4. Store node:
+ *
+ *      map.put(temp, timer)
+ *
+ * --------------------------------------------------
+ *
+ * 5. Move forward:
+ *
+ *      temp = temp.next
+ *      timer++
+ *
+ * --------------------------------------------------
+ *
+ * 6. If no loop:
+ *
+ *      return 0
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(N)
+ */
