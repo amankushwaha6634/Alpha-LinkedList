@@ -69,32 +69,24 @@ class CustomLL2 {
     }
 
     // Function to delete the middle node of the linked list using slow and fast pointers
-    public void deleteMiddle() { // T: O(N/2) | S: O(1)
-        /* If the list is empty or has only one node,
-           return null as there is no middle node to delete */
+    public void deleteMiddle() {
+
         if (head == null || head.next == null) {
-            head = null;  // Return null to signify the list is now empty
+            head = null;
             return;
         }
 
-        // Initialize slow and fast pointers
         Node slow = head;
         Node fast = head;
+        Node prev = null;
 
-        // Move the fast pointer two steps ahead, so that fast.next.next is valid
-        // Actually we are skipping one slow pointer movement by moving 2 step fast
-        fast = fast.next.next;
-
-        // Move 'fast' pointer twice as fast as 'slow'
         while (fast != null && fast.next != null) {
-            slow = slow.next;  // Move slow pointer by one step
-            fast = fast.next.next;  // Move fast pointer by two steps
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        // Delete the middle node by skipping it
-        if (slow.next != null) {
-            slow.next = slow.next.next;  // Skip the middle node
-        }
+        prev.next = slow.next;
     }
 }
 
