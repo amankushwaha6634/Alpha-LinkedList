@@ -95,7 +95,7 @@ class CustomLL2 {
     }
 
     // Function to find the length of the loop in the linked list
-    public int lengthOfLoop() {
+    static int lengthOfLoop(Node head) {
         Node slow = head;
         Node fast = head;
 
@@ -159,7 +159,7 @@ public class Optimal_TortoiseNHare {
         System.out.println("Does the list have a loop? " + (hasLoop ? "Yes" : "No"));
 
         // Get the length of the loop if present
-        int loopLength = list.lengthOfLoop();
+        int loopLength = CustomLL2.lengthOfLoop(list.head);
         System.out.println("Length of the loop: " + (loopLength > 0 ? loopLength : "No loop detected"));
     }
 }
@@ -172,4 +172,80 @@ public class Optimal_TortoiseNHare {
  *
  * The loop starts at node 2 and continues in the cycle 2 -> 3 -> 4 -> 5 -> 2 -> ...
  * This is achieved by connecting the last node (5) back to the second node (2).
+ */
+
+/**
+ * 🎯 Length of Loop (Floyd’s Algorithm) — Optimal
+ *
+ * 🔹 Core Idea:
+ * - First detect loop using slow & fast
+ * - Once they meet → start counting loop length
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Initialize:
+ *
+ *      slow = head
+ *      fast = head
+ *
+ * --------------------------------------------------
+ *
+ * 2. Detect loop:
+ *
+ *      while (fast != null && fast.next != null)
+ *
+ *          slow = slow.next
+ *          fast = fast.next.next
+ *
+ *          if (slow == fast)
+ *              break
+ *
+ * --------------------------------------------------
+ *
+ * 3. If no loop:
+ *
+ *      if (slow != fast)
+ *          return 0
+ *
+ * --------------------------------------------------
+ *
+ * 4. Count loop length:
+ *
+ *      count = 1
+ *      temp = slow.next
+ *
+ *      while (temp != slow)
+ *          count++
+ *          temp = temp.next
+ *
+ * --------------------------------------------------
+ *
+ * 5. Return count
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      1 -> 2 -> 3 -> 4 -> 5
+ *           ^______________|
+ *
+ * Loop: 2 → 3 → 4 → 5 → 2
+ *
+ * Length = 4
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "After detecting cycle using Floyd’s algorithm,
+ * I traverse the loop once to count its length."
  */
