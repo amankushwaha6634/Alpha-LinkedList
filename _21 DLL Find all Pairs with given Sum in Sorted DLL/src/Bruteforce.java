@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 class CustomDoublyLinkedList {
     Node head; // Head of the doubly linked list
 
@@ -44,45 +46,52 @@ class CustomDoublyLinkedList {
     }
 
     // Brute-force method to find all pairs with a given sum in the doubly linked list
-    public void findAllPairsWithSum(int targetSum) { // T: O(n^2) Near about, Not exactly
-        // Case 1: Check if the list is empty
+    public List<List<Integer>> findAllPairsWithSum(int targetSum) { // T: O(N^2) | S: O(K)
+
+        List<List<Integer>> ds = new ArrayList<>(); // DS to store pairs
+        // [ ]
+
         if (head == null) {
-            System.out.println("List is empty"); // If the list is empty, print message and return
-            return;
+            return ds;
         }
 
-        // Case 2: Start with the head node
-        Node currentNode = head;
-        boolean found = false; // Flag to track if any pair with the target sum is found
+        Node temp1 = head;
 
-        // Outer loop to pick each node in the list (starting from the head)
-        while (currentNode != null) {
-            // Case 3: For each node in the outer loop, start checking pairs with the next nodes
-            Node innerNode = currentNode.next; // Inner loop starts from the node after the current node
+        while (temp1 != null) {
 
-            // Inner loop to check each subsequent node for a pair with the target sum
-            while (innerNode != null && currentNode.data + innerNode.data <= targetSum) {
-                // When currentNode.data + innerNode.data > targetSum loop stops
-                // because its sorted list further elements will always give bigger result only.
+            Node temp2 = temp1.next;
 
-                // Case 4: Check if the sum of currentNode's data and innerNode's data equals the target sum
-                if (currentNode.data + innerNode.data == targetSum) {
-                    // If they sum to the target, print the pair
-                    System.out.println("(" + currentNode.data + ", " + innerNode.data + ")");
-                    found = true; // Mark that a pair was found
+            while (temp2 != null && temp1.data + temp2.data <= targetSum) {
+
+                if (temp1.data + temp2.data == targetSum) {
+
+                    List<Integer> pair = new ArrayList<>();
+                    pair.add(temp1.data);
+                    pair.add(temp2.data);
+
+                    ds.add(pair);
                 }
-                // Move to the next node in the inner loop
-                innerNode = innerNode.next;
+
+                temp2 = temp2.next;
             }
 
-            // Move to the next node in the outer loop
-            currentNode = currentNode.next;
+            temp1 = temp1.next;
         }
 
-        // Case 5: If no pair with the target sum was found, print a message indicating that
-        if (!found) {
-            System.out.println("No pairs found with the given sum.");
-        }
+        /*
+        Step 0:
+        ds = [ ]
+
+        Step 1:
+        add (2, 8)
+        ds = [ [2, 8] ]
+
+        Step 2:
+        add (3, 7)
+        ds = [ [2, 8], [3, 7] ]
+         */
+
+        return ds;
     }
 }
 
@@ -103,3 +112,90 @@ public class Bruteforce {
         list.findAllPairsWithSum(10);  // Looking for pairs that sum to 10
     }
 }
+
+
+/*
+🔹 Find All Pairs with Given Sum (Brute + DS) — Complexity
+
+--------------------------------------------------
+| Metric              | Complexity               |
+--------------------------------------------------
+| Time Complexity     | O(N^2)                   |
+| Space Complexity    | O(K)                     |
+--------------------------------------------------
+
+🔹 Why Time = O(N^2)?
+
+- Outer loop runs for every node → N times
+
+      temp1 = head → tail
+
+- Inner loop runs for remaining nodes
+
+      temp2 = temp1.next → end
+
+👉 Total comparisons:
+
+      (N-1) + (N-2) + ... + 1
+      = N(N-1)/2
+      ≈ O(N^2)
+
+--------------------------------------------------
+
+🔹 Optimization used:
+
+      while (temp2 != null && sum <= target)
+
+👉 Since list is sorted,
+   we break early when sum exceeds target
+
+👉 But worst case still O(N^2)
+
+--------------------------------------------------
+
+🔹 Why Space = O(K)?
+
+- We are storing pairs in:
+
+      List<List<Integer>> ds
+
+- Let:
+      K = number of valid pairs
+
+👉 Each pair uses constant space (2 integers)
+
+👉 Total space = O(K)
+
+--------------------------------------------------
+
+🔹 Best / Worst Case:
+
+Case 1: No pairs
+    ds = [ ]
+    Space = O(1)
+
+Case 2: Many pairs
+    e.g. all combinations valid
+
+    Space = O(K)
+
+--------------------------------------------------
+
+🔹 Extra Space (ignoring output):
+
+👉 Only pointers used → O(1)
+
+--------------------------------------------------
+
+🔹 Key Insight:
+
+- Time is high due to nested loops
+- Space depends only on number of results
+
+--------------------------------------------------
+
+🔹 Interview Line:
+
+"I use two nested pointers giving O(N^2) time,
+and store results in a list, so space is O(K)."
+*/
