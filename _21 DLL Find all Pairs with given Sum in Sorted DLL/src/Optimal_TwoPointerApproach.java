@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 class CustomDoublyLinkedList2 {
     Node head; // Head of the doubly linked list
 
@@ -47,53 +49,46 @@ class CustomDoublyLinkedList2 {
     }
 
     // Optimized method using the two-pointer technique to find pairs with the given sum
-    public void findAllPairsWithSum(int targetSum) { // T :0(2N) => O(n) [ To reach tail ] + 0(n) [ To traverse result ] || S:0(1)
-        // Case 1: Check if the list is empty
-        if (head == null) {
-            System.out.println("List is empty"); // If the list is empty, print message and return
-            return;
-        }
+    public List<List<Integer>> findAllPairsWithSum(int targetSum) { // T: O(N) | S: O(K)
 
-        // Case 2: Initialize two pointers
-        Node left = head; // Left pointer starts at the head of the list
-        Node right = head; // Right pointer starts at the head of the list
+        List<List<Integer>> ds = new ArrayList<>();
 
-        // Move the right pointer to the last node
+        if (head == null) return ds;
+
+        Node left = head;
+        Node right = head;
+
+        // find tail
         while (right.next != null) {
-            right = right.next; // Keep moving right pointer to the next node until it reaches the last node
+            right = right.next;
         }
 
-        boolean found = false; // Flag to track if any pair with the target sum is found
-
-        // Step 2: Use the two-pointer technique
-        // The loop continues while the left pointer is still to the left of the right pointer
+        // Safer version (recommended in interviews)
+        // while (left != null && right != null && left != right && left.prev != right)
         while (left.data < right.data) {
-            int sum = left.data + right.data; // Calculate the sum of the data at left and right pointers
 
-            // Case 3: If sum of left and right pointers equals the target sum
+            int sum = left.data + right.data;
+
             if (sum == targetSum) {
-                System.out.println("(" + left.data + ", " + right.data + ")"); // Print the pair
-                found = true; // Mark that a pair was found
-                left = left.next;  // Move left pointer right to explore other potential pairs
-                right = right.prev;  // Move right pointer left to explore other potential pairs
+
+                List<Integer> pair = new ArrayList<>();
+                pair.add(left.data);
+                pair.add(right.data);
+
+                ds.add(pair);
+
+                left = left.next;
+                right = right.prev;
             }
-            // Case 4: If sum is less than target, move left pointer to the right
             else if (sum < targetSum) {
-                left = left.next; // Move left pointer to the right to increase the sum
+                left = left.next;
             }
-            // Case 5: If sum is greater than target, move right pointer to the left
             else {
-                right = right.prev; // Move right pointer to the left to decrease the sum
+                right = right.prev;
             }
-
-            // Pause: At this point, the loop checks and adjusts the pointers based on the sum comparison.
-            // Continue moving left or right pointers and rechecking until a pair is found or the pointers meet.
         }
 
-        // Case 6: If no pair with the target sum was found, print a message indicating that
-        if (!found) {
-            System.out.println("No pairs found with the given sum."); // If no pairs were found, print this message
-        }
+        return ds;
     }
 }
 
@@ -114,3 +109,81 @@ public class Optimal_TwoPointerApproach {
         list.findAllPairsWithSum(10);  // Looking for pairs that sum to 10
     }
 }
+
+/**
+ * 🎯 Find Pairs with Given Sum (Optimal DLL + DS)
+ *
+ * 🔹 Core Idea:
+ * - Use two pointers:
+ *      left → head
+ *      right → tail
+ *
+ * - Store valid pairs in List<List<Integer>>
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Initialize:
+ *
+ *      ds = empty list
+ *      left = head
+ *      right = last node
+ *
+ * --------------------------------------------------
+ *
+ * 2. Traverse:
+ *
+ *      while (left != right && left.prev != right)
+ *
+ * --------------------------------------------------
+ *
+ * 3. Calculate:
+ *
+ *      sum = left.data + right.data
+ *
+ * --------------------------------------------------
+ *
+ * 4. If sum == target:
+ *
+ *      add [left, right] to ds
+ *      left = left.next
+ *      right = right.prev
+ *
+ * --------------------------------------------------
+ *
+ * 5. If sum < target:
+ *
+ *      left = left.next
+ *
+ * --------------------------------------------------
+ *
+ * 6. If sum > target:
+ *
+ *      right = right.prev
+ *
+ * --------------------------------------------------
+ *
+ * 7. Return ds
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(K)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - DLL allows backward traversal
+ * - Same as two-pointer array technique
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I use two pointers from both ends and store valid pairs,
+ * achieving O(N) time and O(K) space."
+ */
