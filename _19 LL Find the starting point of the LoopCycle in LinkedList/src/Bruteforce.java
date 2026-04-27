@@ -139,3 +139,166 @@ public class Bruteforce {
         }
     }
 }
+
+/**
+ * 🎯 Linked List Cycle Operations (Using HashSet) — Algorithm
+ *
+ * Covers:
+ * 1. printList (safe print with loop)
+ * 2. detectLoop
+ * 3. startNodeOfCycle
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ *
+ * - Use HashSet to track visited nodes
+ * - If a node repeats → loop detected
+ * - First repeated node → start of cycle
+ *
+ * --------------------------------------------------
+ *
+ * 🔥 1. printList()
+ *
+ * Goal:
+ * - Print list safely even if loop exists
+ *
+ * Steps:
+ *
+ * 1. Initialize:
+ *
+ *      curr = head
+ *      set = empty HashSet
+ *
+ * 2. Traverse:
+ *
+ *      while (curr != null)
+ *
+ * 3. Check:
+ *
+ *      if (set.contains(curr))
+ *          print "Loop detected"
+ *          break
+ *
+ * 4. Print node:
+ *
+ *      print curr.data
+ *
+ * 5. Mark visited:
+ *
+ *      set.add(curr)
+ *
+ * 6. Move:
+ *
+ *      curr = curr.next
+ *
+ * --------------------------------------------------
+ *
+ * 🔥 2. detectLoop()
+ *
+ * Goal:
+ * - Check if cycle exists
+ *
+ * Steps:
+ *
+ * 1. Initialize:
+ *
+ *      temp = head
+ *      set = empty HashSet
+ *
+ * 2. Traverse:
+ *
+ *      while (temp != null)
+ *
+ * 3. Check:
+ *
+ *      if (set.contains(temp))
+ *          return true
+ *
+ * 4. Store:
+ *
+ *      set.add(temp)
+ *
+ * 5. Move:
+ *
+ *      temp = temp.next
+ *
+ * 6. End:
+ *
+ *      return false
+ *
+ * --------------------------------------------------
+ *
+ * 🔥 3. startNodeOfCycle()
+ *
+ * Goal:
+ * - Find first node of loop
+ *
+ * Steps:
+ *
+ * 1. Initialize:
+ *
+ *      temp = head
+ *      set = empty HashSet
+ *
+ * 2. Traverse:
+ *
+ *      while (temp != null)
+ *
+ * 3. Check repetition:
+ *
+ *      if (set.contains(temp))
+ *          return temp   // start of cycle
+ *
+ * 4. Store:
+ *
+ *      set.add(temp)
+ *
+ * 5. Move:
+ *
+ *      temp = temp.next
+ *
+ * 6. If no loop:
+ *
+ *      return null
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      1 -> 2 -> 3 -> 4 -> 5
+ *           ^______________|
+ *
+ * Steps:
+ *
+ *      Visit 1 → store
+ *      Visit 2 → store
+ *      Visit 3 → store
+ *      Visit 4 → store
+ *      Visit 5 → store
+ *
+ *      Next → goes back to 2
+ *
+ *      2 already exists → return 2 ✅
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(N)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - HashSet gives O(1) lookup
+ * - First repeated node = entry of cycle
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "I use a HashSet to track visited nodes and detect repetition.
+ * The first repeated node is the start of the cycle."
+ */
