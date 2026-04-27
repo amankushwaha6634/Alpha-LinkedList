@@ -172,59 +172,74 @@ public class Optimal_TortoiseNHare {
 }
 
 /*
-🔹 Start Node of Cycle (Using HashSet) — Complexity
+🔹 Start Node of Cycle (Floyd’s Algorithm) — Complexity
 
 --------------------------------------------------
 | Metric              | Complexity               |
 --------------------------------------------------
 | Time Complexity     | O(N)                     |
-| Space Complexity    | O(N)                     |
+| Space Complexity    | O(1)                     |
 --------------------------------------------------
 
 🔹 Why Time = O(N)?
 
-- We traverse each node only once
-- For each node:
-      contains() → O(1)
-      add()      → O(1)
+Phase 1: Detect loop
+    slow → 1 step
+    fast → 2 steps
 
-👉 Total = O(N)
-
---------------------------------------------------
-
-🔹 Why Space = O(N)?
-
-- We store visited nodes in HashSet
-- In worst case (no loop):
-      all N nodes stored
-
-👉 Space = O(N)
+👉 In worst case:
+    they meet after O(N)
 
 --------------------------------------------------
 
-🔹 Important Case:
+Phase 2: Find start of cycle
 
-Case 1: No Loop
-    Traverse entire list → O(N)
-    Store all nodes → O(N)
+    slow = head
+    fast = meeting point
 
-Case 2: Loop Exists
-    Traverse until loop repeats
-    Still at most N steps
+👉 Move both one step:
 
-👉 Time remains O(N)
+    while (slow != fast)
+
+👉 This takes at most O(N)
 
 --------------------------------------------------
 
-🔹 Key Insight:
+Total:
 
-- HashSet gives O(1) lookup
-- Helps detect first repeated node (cycle start)
+    O(N) + O(N) = O(N)
+
+--------------------------------------------------
+
+🔹 Why Space = O(1)?
+
+- No extra data structures used
+- Only 2 pointers:
+
+      slow, fast
+
+👉 Constant memory
+
+--------------------------------------------------
+
+🔹 Important Insight:
+
+- No HashSet / Map used
+- Works purely on pointer manipulation
+
+--------------------------------------------------
+
+🔹 Comparison:
+
+| Approach   | Time | Space |
+|-----------|------|------|
+| HashSet   | O(N) | O(N) ❌ |
+| Floyd     | O(N) | O(1) ✅ |
 
 --------------------------------------------------
 
 🔹 Interview Line:
 
-"Using HashSet, we detect the cycle start in O(N) time
-with O(N) extra space due to storing visited nodes."
+"Floyd’s algorithm detects the cycle and finds its start
+in linear time using constant space, making it optimal."
 */
