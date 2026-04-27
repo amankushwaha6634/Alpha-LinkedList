@@ -47,36 +47,31 @@ class CustomDoublyLinkedList2 {
     }
 
     // Method to remove duplicates from a sorted doubly linked list
-    public void removeDuplicatesFromSortedDLL() { // T: 0(N) || s:0(1)
-        // Case 1: Check if the list is empty
-        if (head == null) {
-            System.out.println("List is empty"); // If the list is empty, print a message and return
-            return;
-        }
+    public void removeDuplicatesFromSortedDLL() { // T: O(N) | S: O(1)
 
-        Node currNode = head; // Start from the head of the list
+        if (head == null) return;
 
-        // Traverse the list
-        while (currNode != null && currNode.next != null) {
-            // Case 2: If the current node's data is equal to the next node's data
-            if (currNode.data == currNode.next.data) {
-                Node nextNode = currNode.next; // Store the duplicate node
+        Node temp = head;
 
-                // Skip all subsequent duplicates
-                while (nextNode != null && nextNode.data == currNode.data) {
-                    nextNode = nextNode.next; // Move to the first node with a different value
-                }
-                // When nextNode will reach non-duplicate no. loop will break;
-                // When nextNode will reach null (end) loop will break;
+        while (temp != null && temp.next != null) {
 
-                currNode.next = nextNode; // Link current node to the first non-duplicate node
-                if (nextNode != null) { // check if is nextNode not null ?
-                    nextNode.prev = currNode; // Update the previous pointer of the non-duplicate node
-                }
-            } else {
-                // Case 3: Move to the next distinct node
-                currNode = currNode.next;
+            Node nextNode = temp.next;
+
+            // 🔥 Skip all duplicates
+            while (nextNode != null && nextNode.data == temp.data) {
+                nextNode = nextNode.next;
             }
+
+            // 🔥  (IMPORTANT LINE)
+            temp.next = nextNode;
+
+            // Fix prev pointer
+            if (nextNode != null) {
+                nextNode.prev = temp;
+            }
+
+            // Move forward
+            temp = temp.next;
         }
     }
 }
@@ -108,3 +103,111 @@ public class Bruteforce {
         list.printList(); // Print the list after removing duplicates
     }
 }
+
+
+/**
+ * 🎯 Remove Duplicates from Sorted Doubly Linked List — Algorithm
+ *
+ * 🔹 Problem:
+ * - Given a sorted doubly linked list
+ * - Remove all duplicate nodes
+ *
+ * Example:
+ *      1 <-> 1 <-> 1 <-> 2 <-> 3 <-> 3
+ *
+ * Result:
+ *      1 <-> 2 <-> 3
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Since list is sorted → duplicates are adjacent
+ * - Use two pointers:
+ *
+ *      temp → current node
+ *      nextNode → runner pointer to skip duplicates
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Steps:
+ *
+ * 1. Handle edge case:
+ *
+ *      if (head == null)
+ *          return
+ *
+ * --------------------------------------------------
+ *
+ * 2. Initialize:
+ *
+ *      temp = head
+ *
+ * --------------------------------------------------
+ *
+ * 3. Traverse list:
+ *
+ *      while (temp != null && temp.next != null)
+ *
+ * --------------------------------------------------
+ *
+ * 4. Move runner pointer:
+ *
+ *      nextNode = temp.next
+ *
+ *      while (nextNode != null && nextNode.data == temp.data)
+ *          nextNode = nextNode.next
+ *
+ * --------------------------------------------------
+ *
+ * 5. Skip duplicates:
+ *
+ *      temp.next = nextNode
+ *
+ * --------------------------------------------------
+ *
+ * 6. Fix backward link:
+ *
+ *      if (nextNode != null)
+ *          nextNode.prev = temp
+ *
+ * --------------------------------------------------
+ *
+ * 7. Move forward:
+ *
+ *      temp = temp.next
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Dry Run:
+ *
+ *      1 <-> 1 <-> 1 <-> 2
+ *
+ * temp = 1
+ * nextNode moves → 2
+ *
+ * temp.next = 2
+ *
+ * Result:
+ *      1 <-> 2
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Complexity:
+ *
+ * 👉 Time = O(N)
+ * 👉 Space = O(1)
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Key Insight:
+ *
+ * - We don't delete nodes individually
+ * - We skip duplicates in one jump
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Interview Line:
+ *
+ * "Since the list is sorted, I skip all adjacent duplicates
+ * by linking current node to next distinct node in one pass."
+ */
