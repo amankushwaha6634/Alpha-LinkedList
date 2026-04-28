@@ -113,6 +113,29 @@ public class Bruteforce {
     }
 }
 
+/**
+ * 🎯 Find All Pairs with Given Sum (Brute Force + DS)
+ *
+ * 🔹 Problem:
+ * - Given a sorted doubly linked list
+ * - Find all pairs whose sum = target
+ * - Store result in List<List<Integer>>
+ *
+ * Example:
+ *      1 <-> 2 <-> 3 <-> 5 <-> 7 <-> 8
+ *      target = 10
+ *
+ * Result:
+ *      [ [2, 8], [3, 7] ]
+ *
+ * --------------------------------------------------
+ *
+ * 🔹 Core Idea:
+ * - Fix one pointer (temp1)
+ * - Use second pointer (temp2) to scan ahead
+ * - Store valid pairs in DS
+ */
+
 
 /*
 🔹 Find All Pairs with Given Sum (Brute + DS) — Complexity
