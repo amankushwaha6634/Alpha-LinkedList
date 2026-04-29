@@ -58,7 +58,10 @@ class CustomDoublyLinkedList2 {
             Node nextNode = temp.next;
 
             // 🔥 Skip all duplicates
-            while (nextNode != null && nextNode.data == temp.data) {
+            while (nextNode != null) {
+                if (nextNode.data != temp.data) {
+                    break;
+                }
                 nextNode = nextNode.next;
             }
 
