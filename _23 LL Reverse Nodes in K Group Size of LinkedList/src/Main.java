@@ -58,10 +58,14 @@ class CustomLL5 {
 
     // Function to get the Kth node from a given position in the linked list
     static Node getKthNode(Node node, int k) {
-        int count = 1; // Initialize the count to 1
-        while (node != null && count < k) {
-            node = node.next; // Move to the next node
+        int count = 0; // Initialize the count to 1
+        while (node != null) {
             count++; // Increment the count
+            if(count == k){
+                break; // break pointer at kth node.
+            }
+            node = node.next; // Move to the next node
+
         }
         return node; // Return the Kth node or null if not found
     }
